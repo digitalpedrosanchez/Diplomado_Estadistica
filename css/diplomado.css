@@ -1,0 +1,33 @@
+/* Carátula del diplomado (versión 5) */
+.dip-hero h1{font-size:2rem;max-width:32ch}
+ul.mirada{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+ul.mirada li{background:var(--fondo2);border:1px solid var(--linea);border-left:6px solid var(--oro);border-radius:14px;padding:14px 18px}
+ul.mirada strong{display:block;font-size:1.3rem;color:var(--azul)}
+ul.mirada span{font-size:.88rem;color:var(--texto2)}
+ul.mods{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+li.mod{display:flex;flex-direction:column;gap:6px;border:1px solid var(--linea);border-radius:14px;padding:18px 20px;background:var(--fondo);scroll-margin-top:80px}
+li.mod h3{color:var(--azul);font-size:1.1rem;margin:0}
+.mod-n{display:flex;align-items:center;gap:8px;margin:0;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--texto2)}
+.n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--azul);color:#fff;font-size:.8rem;font-weight:700;flex:none}
+.mod-l{margin:0;font-size:.86rem;color:var(--texto2)}
+.mod-i{margin:0;font-weight:600;font-size:.9rem}
+li.mod .btn{margin-top:auto;align-self:flex-start}
+li.mod .global{margin:6px 0 0}
+.estado{margin:4px 0 8px;font-size:.82rem;color:var(--texto2)}
+ol.pasos-dip{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+ol.pasos-dip li{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--linea);border-radius:12px;padding:12px 14px}
+ol.pasos-dip p{margin:2px 0 0;font-size:.88rem;color:var(--texto2)}
+ul.antes{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0}
+ul.antes a{display:inline-flex;align-items:center;padding:10px 16px;border:1px solid var(--linea);border-radius:22px;text-decoration:none;min-height:44px}
+ul.instr{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+ul.instr li{display:flex;gap:12px;align-items:center;background:var(--fondo2);border:1px solid var(--linea);border-radius:12px;padding:12px 14px}
+ul.instr strong{display:block}
+ul.instr span:not(.n){font-size:.85rem;color:var(--texto2)}
+main.dip section{scroll-margin-top:80px}
+nav.lateral .sub-mod ul{list-style:none;margin:4px 0 6px 10px;padding:0 0 0 10px;border-left:2px solid var(--oro)}
+nav.lateral .sub-mod ul a{font-size:.84rem}
+ul.accesos{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+ul.accesos a{display:flex;flex-direction:column;gap:6px;height:100%;padding:16px 18px;border:1px solid var(--linea);border-radius:14px;text-decoration:none;color:var(--texto);background:var(--fondo)}
+ul.accesos a:hover{border-color:var(--azul)}
+ul.accesos strong{color:var(--azul);font-size:1.05rem}
+ul.accesos span:not(.n){font-size:.88rem;color:var(--texto2)}

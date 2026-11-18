@@ -1,0 +1,90 @@
+/* Versión 8: correcciones de usabilidad (va al final, sobre los estilos anteriores) */
+
+/* 1. Menú de pasos: [Diplomado] [pasos] [Módulo] en una fila, sin encimarse */
+@media (min-width:901px){
+  nav.ruta{display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:nowrap;row-gap:0}
+  nav.ruta .a-dip,nav.ruta .n-mod,nav.ruta details.n-sel{position:relative;transform:none;top:auto;right:auto;left:auto;margin:0;flex:none}
+  nav.ruta .a-dip{order:1}
+  nav.ruta ol{order:2;flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;justify-content:safe center;padding:2px 0;margin:0;scrollbar-width:thin}
+  nav.ruta .n-mod{order:3}
+}
+
+/* 2. Celular: cabecera compacta, en una sola fila */
+.t-txt{margin-left:4px}
+@media (max-width:900px){
+  .barra{gap:6px;padding:6px 10px;flex-wrap:nowrap}
+  .barra button{padding:6px 10px;min-width:44px}
+  .barra .t-txt,.marca .m-sub{display:none}
+  .marca{min-width:0;gap:8px}
+  .marca img{width:32px}
+  .marca strong{font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .barra span[aria-label="Tamaño de letra"]{display:flex;gap:4px;flex:none}
+  /* fila 1: Diplomado y selector de módulo; fila 2: pasos con desplazamiento lateral */
+  nav.ruta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;padding:6px 10px}
+  nav.ruta .a-dip{position:static;transform:none;margin:0;order:1;min-height:40px}
+  nav.ruta .n-mod,nav.ruta details.n-sel{position:relative;transform:none;margin:0;order:2;display:inline-block;top:auto;right:auto}
+  nav.ruta ol{order:3;flex:1 0 100%;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding:2px 0 6px;margin:0;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  nav.ruta ol li{scroll-snap-align:start;flex:none}
+  nav.ruta a{min-height:40px;padding:6px 12px}
+  .n-lista{right:0;min-width:0;width:min(340px,calc(100vw - 20px))}
+}
+
+/* 3. Nada se sale de la pantalla: botones largos y tablas anchas */
+.btn{white-space:normal;max-width:100%;text-align:center;overflow-wrap:anywhere}
+.tabla-desliza{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 12px}
+.tabla-desliza table{margin:0}
+main a{overflow-wrap:anywhere}
+main pre,main code{white-space:pre-wrap;overflow-wrap:anywhere}
+main img,main svg,main iframe{max-width:100%}
+
+/* 4. Objetivos táctiles de 44 px en celular */
+@media (max-width:900px){
+  nav.lateral li.menu2 a,.sub-lista a{min-height:44px;display:flex;align-items:center}
+  nav.migas a{display:inline-block;padding:6px 0}
+}
+
+/* 5. Módulo 2: lecciones, figuras del Visor y mapa */
+.lec-cards{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.lec-cards a{display:block;height:100%;padding:14px 16px;border:1px solid var(--linea);border-top:5px solid var(--azul);border-radius:12px;background:var(--fondo2);text-decoration:none;color:var(--texto)}
+.lec-cards a:hover{border-color:var(--azul)}
+.lec-cards .l-n{display:block;font-size:.8rem;font-weight:700;color:var(--texto2);text-transform:uppercase;letter-spacing:.04em}
+.lec-cards strong{display:block;color:var(--azul);font-size:1.05rem;margin:2px 0 6px}
+.lec-cards .l-d{display:block;font-size:.9rem;color:var(--texto2)}
+.lec-cards .l-ok{display:inline-block;margin-top:8px;font-size:.82rem;font-weight:700;color:var(--verde)}
+.ciclo{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;counter-reset:c}
+.ciclo li{counter-increment:c;padding:10px 12px;border-radius:10px;background:var(--fondo2);border-left:5px solid var(--oro);font-weight:600}
+.ciclo li::before{content:counter(c) ". ";color:var(--azul)}
+.visor{border:1px solid var(--linea);border-radius:10px;background:var(--fondo);padding:12px 14px;margin:10px 0}
+.visor h4{margin:0 0 8px;font-size:.95rem}
+.visor .v-lbl{margin:0 0 6px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--texto2)}
+.visor svg{display:block;width:100%;max-width:560px;height:auto}
+.visor svg text{fill:var(--texto);font-family:inherit}
+.visor svg .ej{stroke:var(--texto2);stroke-width:1}
+.visor svg .bar{fill:var(--azul)}
+.visor svg .lin{fill:none;stroke:var(--azul);stroke-width:2.5}
+.visor svg .pt{fill:var(--azul)}
+.visor svg .aj{stroke:var(--oro);stroke-width:2.5}
+.visor pre.tallo{font-family:Consolas,"Courier New",monospace;font-size:.95rem;line-height:1.5;margin:0;white-space:pre}
+table.spss{border-collapse:collapse;font-size:.88rem;min-width:420px}
+table.spss th,table.spss td{border-bottom:1px solid var(--linea);padding:4px 10px;text-align:right}
+table.spss th:first-child,table.spss td:first-child,table.spss th:nth-child(2),table.spss td:nth-child(2){text-align:left}
+table.spss thead th{border-bottom:2px solid var(--texto2);font-weight:700}
+table.spss caption{caption-side:top;text-align:left;font-weight:700;padding:0 0 6px}
+.pasos-spss{counter-reset:p;list-style:none;padding:0;margin:8px 0}
+.pasos-spss li{counter-increment:p;position:relative;padding:6px 0 6px 38px}
+.pasos-spss li::before{content:counter(p);position:absolute;left:0;top:5px;width:26px;height:26px;border-radius:50%;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700}
+html[data-theme="dark"] .pasos-spss li::before{color:#14191E}
+.m{font-weight:600;color:var(--azul)}
+.lamina{display:inline-flex;align-items:center;gap:6px}
+.ejemplo{border:1px solid var(--linea);border-left:6px solid var(--azul);border-radius:12px;padding:6px 18px 14px;margin:18px 0;background:var(--fondo)}
+.ejemplo>h3{margin-top:12px}
+.lectura{padding:10px 14px;border-left:4px solid var(--oro);background:var(--fondo2);border-radius:6px}
+.mapa-cap{min-width:520px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.small{font-size:.86rem;color:var(--texto2)}
+nav.ruta a.actual-paso{border-color:var(--azul);font-weight:700}
+nav.ruta a.actual-paso::before{background:var(--azul);color:#fff}
+.marca small.m-sub{font-size:inherit}
+@media (min-width:901px){.marca small.m-sub{display:block}}
+@media (max-width:900px){.marca>span{min-width:0;overflow:hidden}.marca small.m-sub{display:none}}
+main p,main li,main dd,main td,main th,main summary{overflow-wrap:anywhere}

@@ -1,0 +1,18 @@
+/* Versión 7: módulos de muestra */
+.muestra{margin:0 0 16px;padding:10px 16px;border-radius:10px;background:var(--past-ambar,#FFF4E0);border:1px dashed var(--oro);font-size:.92rem}
+html[data-theme="dark"] .muestra{background:#3a3220;color:#F5E9C8}
+.video video{position:absolute;inset:0;width:100%;height:100%;background:#000}
+.nota-v{margin-top:-4px}
+.pasos-r{list-style:none;padding:0;display:grid;gap:10px}
+.pasos-r a{display:block;padding:12px 16px;border:1px solid var(--linea);border-left:6px solid var(--azul);border-radius:12px;text-decoration:none;color:var(--texto);background:var(--fondo2)}
+.pasos-r strong{display:block;color:var(--azul)}
+.ideas3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.ideas3>div{border:1px solid var(--linea);border-top:5px solid var(--oro);border-radius:12px;padding:12px 14px;background:var(--fondo2)}
+.ideas3 .i-n{margin:0;font-size:.8rem;font-weight:700;color:var(--texto2)}.ideas3 h3{margin:.2em 0;color:var(--azul)}
+.claves{display:flex;flex-wrap:wrap;gap:8px}.claves span{padding:6px 12px;border-radius:999px;background:var(--fondo2);border:1px solid var(--oro);font-size:.9rem}
+.lecs7{padding-left:1.2em}.lecs7 li{margin:8px 0}.lecs7 .lec-n{margin:0;font-size:.82rem;color:var(--texto2);font-weight:700}.lecs7 .lec-t{margin:0 0 2px;font-weight:600}
+.caps.dos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ref{font-size:.98rem}
+dl.formulas svg{max-width:100%;height:auto;overflow:visible}
+dl.formulas dd>div[role="img"]{overflow-x:auto;padding:6px 0;font-size:1.1rem}
+.mod .enl-ed{display:block;margin-top:6px;font-size:.85rem}
