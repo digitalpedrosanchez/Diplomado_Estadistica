@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 2 · Presentación · Tablas y gráficas · Diplomado UNISON</title>
+<meta name="author" content="Jorge Alberto Muñan Valencia">
+<meta name="description" content="Módulo 2 del diplomado: estadística descriptiva con métodos tabulares y gráficos aplicada a la investigación económica. Cinco lecciones con ejemplos paso a paso en SPSS.">
+<style>
+:root{
+  color-scheme: light;
+  --surface-0:#F4F3F0; --surface-1:#FFFFFF; --surface-2:#EEF1F4;
+  --line:#DFE4EA; --line-strong:#C9D2DA;
+  --ink:#1B2631; --ink-2:#3A4A5A; --ink-3:#566573;
+  --accent:#24398A; --brand:#24398A; --brand-soft:#E8EBF6; --gold:#E1B73D; --gold-soft:#FBF3DD; --gold-ink:#7A5C0E;
+  --warn:#B9770E; --ok:#1E8449; --bad:#C0392B;
+  --mark:#24398A; --mark-2:#7F93CF; --mark-3:#C3CCE8;
+  --c1:#24398A; --c2:#E1B73D; --c3:#7F93CF; --c4:#C3CCE8; --c5:#5C4A12; --pl1:#FFFFFF;
+  --sep-bg:#24398A; --sep-ink:#FFFFFF; --sep-ink2:#D5DCF0;
+  --radius:10px;
+  --font:Arial,Helvetica,sans-serif;
+  --mono:Consolas,"Courier New",ui-monospace,monospace;
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --surface-0:#14191E; --surface-1:#1B222A; --surface-2:#232C35;
+  --line:#2E3842; --line-strong:#3E4A56;
+  --ink:#F2F4F6; --ink-2:#C4CDD5; --ink-3:#AEB6BF;
+  --accent:#8DA3C9; --brand:#8DA3C9; --brand-soft:#1C2440; --gold:#E1B73D; --gold-soft:#2E2718; --gold-ink:#E8C766;
+  --warn:#EB9950; --ok:#58D68D; --bad:#E06A5C;
+  --mark:#7F96E6; --mark-2:#4A61B8; --mark-3:#2C3A70;
+  --c1:#7F96E6; --c2:#E1B73D; --c3:#C9D3F5; --c4:#4A5A94; --c5:#8C6D1A; --pl1:#14191E;
+  --sep-bg:#1A2A66; --sep-ink:#F2F4F6; --sep-ink2:#C9D2F2;
+}
+html.proy{--ink:#000;--ink-2:#111;--ink-3:#333}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--font);background:var(--surface-0);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55;overflow:hidden}
+
+/* ---------- Deck ---------- */
+#deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:0}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:clamp(20px,2.8vw,46px) clamp(20px,4.5vw,86px) 28px;
+  overflow-y:auto;overflow-x:hidden;background:var(--surface-0);animation:fade .28s ease}
+.slide.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide{animation:none}}
+.slide-inner{width:100%;max-width:1180px;margin:auto}
+.slide.alt{background:var(--surface-2)}
+
+/* ---------- Tipografía ---------- */
+.eyebrow{font-size:clamp(11px,1.05vw,13px);font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 8px}
+h1{font-size:clamp(30px,4.6vw,58px);line-height:1.08;letter-spacing:-.02em;margin:0 0 16px;font-weight:700}
+h2{font-size:clamp(22px,2.9vw,38px);line-height:1.14;letter-spacing:-.015em;margin:0 0 12px;font-weight:700;color:var(--brand)}
+.slide:not(.sep):not(.oro) h2::after{content:"";display:block;width:56px;height:3px;border-radius:2px;margin-top:9px;
+  background:linear-gradient(90deg,var(--brand) 0%,var(--brand) 45%,var(--gold) 55%,var(--gold) 100%)}
+h3{font-size:clamp(16px,1.6vw,21px);line-height:1.3;margin:0 0 10px;font-weight:700}
+p{margin:0 0 14px;font-size:clamp(14px,1.35vw,18px);color:var(--ink-2);max-width:74ch}
+.lead{font-size:clamp(16px,1.75vw,23px);color:var(--ink-2);max-width:60ch;line-height:1.45}
+.small{font-size:clamp(12.5px,1.2vw,15.5px)}
+.muted{color:var(--ink-3)}
+strong,b{color:var(--ink);font-weight:700}
+ul,ol{margin:0 0 16px;padding-left:1.15em;font-size:clamp(14px,1.35vw,18px);color:var(--ink-2);max-width:74ch}
+li{margin-bottom:9px}
+li::marker{color:var(--gold-ink)}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+a:hover{border-bottom-color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.92em}
+kbd{font-family:var(--mono);font-size:.85em;background:var(--surface-2);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:4px;padding:1px 6px}
+
+/* ---------- Distribución ---------- */
+.grid{display:grid;gap:clamp(14px,2vw,30px)}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.g-6-4{grid-template-columns:minmax(0,6fr) minmax(0,4fr)}
+.g-7-3{grid-template-columns:minmax(0,7fr) minmax(0,3fr)}
+@media(max-width:900px){.g2,.g3,.g-6-4,.g-7-3{grid-template-columns:minmax(0,1fr)}.g4,.g5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.g4,.g5{grid-template-columns:minmax(0,1fr)}}
+.mt{margin-top:18px}.mt-s{margin-top:10px}.mb0{margin-bottom:0}
+.hd{margin-bottom:clamp(10px,1.4vw,18px)}
+
+/* ---------- Tarjetas y avisos ---------- */
+.card{background:var(--surface-1);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(14px,1.5vw,22px)}
+.card h3{margin-top:0}
+.card.tb{border-top:4px solid var(--brand)}
+.card.tg{border-top:4px solid var(--gold)}
+.card .n{font-size:clamp(30px,3.4vw,48px);font-weight:700;line-height:1;color:var(--gold-ink);margin-bottom:10px}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.note{border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin:12px 0}
+.note p{margin:0;color:var(--ink);font-size:clamp(13px,1.25vw,16px)}
+.callout{background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));border-radius:var(--radius);padding:clamp(12px,1.4vw,18px);margin:12px 0}
+.callout p:last-child{margin-bottom:0}
+.formula{font-family:var(--mono);font-size:clamp(14px,1.4vw,19px);color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:6px 12px;display:inline-block;margin:0 0 10px}
+.stat{font-size:clamp(48px,7vw,104px);font-weight:700;line-height:.95;letter-spacing:-.03em;color:var(--brand);margin:0 0 10px;font-variant-numeric:tabular-nums}
+
+/* ---------- Tablas ---------- */
+.tbl-wrap{overflow-x:auto;margin:0 0 14px;max-width:100%}
+table.t{border-collapse:collapse;width:100%;font-size:clamp(12.5px,1.2vw,16px);font-variant-numeric:tabular-nums;background:var(--surface-1);border-radius:var(--radius);overflow:hidden}
+.t th,.t td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line)}
+.t th:first-child,.t td:first-child{text-align:left}
+.t thead th,.t tr:first-child th{font-weight:700;color:var(--ink-3);font-size:.85em;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line-strong);white-space:nowrap}
+.t td{color:var(--ink)}
+.t tr.tot td{font-weight:700;border-bottom:none;background:var(--surface-2)}
+.t tr.hl td{background:var(--gold-soft)}
+.t td.on,.t th.on{background:var(--brand-soft);color:var(--ink)}
+.t td.off,.t th.off{color:var(--line-strong)}
+.t.left td,.t.left th{text-align:left}
+.t.lg{font-size:clamp(13.5px,1.35vw,18px)}
+
+/* ---------- Controles ---------- */
+button{font-family:inherit;font-size:clamp(12px,1.15vw,14.5px);font-weight:600;padding:7px 14px;border-radius:7px;border:1px solid var(--line-strong);
+  background:var(--surface-1);color:var(--ink);cursor:pointer;transition:.15s}
+button:hover{background:var(--surface-2);border-color:var(--ink-3)}
+button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+:root[data-theme="dark"] button.on{color:#14191E}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:0 0 14px}
+.ctrl .lbl{font-size:clamp(11px,1.05vw,13px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.ctrl .lbl+.lbl,.seg+.lbl{margin-left:10px}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--surface-1)}
+.seg button{border:0;border-radius:0;padding:7px 13px}
+.seg button+button{border-left:1px solid var(--line-strong)}
+input[type=range]{accent-color:var(--accent);width:clamp(140px,18vw,260px)}
+.val{font-family:var(--mono);font-weight:700;color:var(--ink);min-width:2.6em;display:inline-block;text-align:right;font-size:clamp(14px,1.4vw,18px)}
+.msg{font-size:clamp(13px,1.25vw,16px);color:var(--ink);min-height:2.8em}
+.msg.warn{color:var(--warn)}
+
+/* ---------- Gráficos ---------- */
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--font);fill:var(--ink-2)}
+.chart .tk{font-size:13px;fill:var(--ink-3)}
+.chart .ax{font-size:13.5px;fill:var(--ink-2);font-weight:700}
+.chart .dl{font-size:13.5px;fill:var(--ink);font-weight:700}
+.chart .grid-l{stroke:var(--line);stroke-width:1}
+.chart .base{stroke:var(--ink-3);stroke-width:1.5}
+.leg{display:flex;flex-direction:column;gap:8px;margin:0 0 12px}
+.leg div{display:flex;align-items:center;gap:10px;font-size:clamp(13px,1.25vw,16px);color:var(--ink)}
+.leg i{width:16px;height:16px;border-radius:4px;flex:none}
+.leg span{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.tip{position:fixed;pointer-events:none;z-index:900;background:var(--surface-1);border:1px solid var(--line-strong);border-radius:7px;padding:7px 11px;font-size:13px;
+  box-shadow:0 4px 18px rgba(0,0,0,.14);opacity:0;transition:opacity .12s;color:var(--ink);max-width:250px}
+.tip.on{opacity:1}
+
+/* ---------- Datos crudos, tallo y hoja ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+.chips span{font-family:var(--mono);font-size:clamp(12px,1.15vw,15px);padding:4px 9px;border-radius:7px;border:1px solid var(--line-strong);color:var(--ink-3);background:var(--surface-1)}
+.chips span.in{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chips span.in{color:#14191E}
+.stem{font-family:var(--mono);font-size:clamp(13px,1.3vw,17px);line-height:1.55;color:var(--ink);background:var(--surface-1);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;white-space:pre;overflow-x:auto;margin:0 0 12px}
+.stem .f{color:var(--ink-3)}
+.stem .s{color:var(--brand);font-weight:700}
+
+/* ---------- Ruta y agenda ---------- */
+.ruta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.ruta em{font-style:normal;font-size:clamp(11px,1.05vw,13px);font-weight:700;color:var(--ink-2);margin-right:6px;white-space:nowrap}
+.ruta span{width:26px;height:26px;border-radius:50%;border:1px solid var(--line-strong);font-size:12px;font-weight:700;color:var(--ink-3);display:flex;align-items:center;justify-content:center;background:var(--surface-1)}
+.ruta span.ex{border-style:dashed}
+.ruta span.done{background:var(--brand-soft);border-color:var(--brand-soft);color:var(--brand)}
+.ruta span.now{background:var(--brand);border-color:var(--brand);color:#fff;border-style:solid}
+:root[data-theme="dark"] .ruta span.now{color:#14191E}
+.agenda{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 36px;counter-reset:a;max-width:none}
+.agenda li{counter-increment:a;position:relative;padding:4px 0 4px 44px;font-size:clamp(14px,1.45vw,19px);line-height:1.35;color:var(--sep-ink);margin:0}
+.agenda li::before{content:counter(a);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1B2631;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.agenda li.ex b{display:inline-block;font-size:12px;letter-spacing:.08em;border:1px solid var(--gold);color:var(--gold);border-radius:4px;padding:0 6px;margin-right:8px;vertical-align:2px}
+@media(max-width:760px){.agenda{grid-template-columns:1fr}}
+.flow{display:flex;align-items:stretch;gap:10px;margin-top:16px}
+.flow div{flex:1;background:var(--surface-1);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:clamp(13px,1.3vw,16px);font-weight:700;color:var(--ink);display:flex;align-items:center;gap:10px}
+.flow div b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+:root[data-theme="dark"] .flow div b{color:#14191E}
+.flow i{flex:none;align-self:center;width:0;height:0;border-left:12px solid var(--gold);border-top:9px solid transparent;border-bottom:9px solid transparent}
+@media(max-width:760px){.flow{flex-direction:column}.flow i{display:none}}
+
+/* ---------- Ejemplos en SPSS ---------- */
+.ej{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,2.4vw,40px)}
+@media(max-width:900px){.ej{grid-template-columns:minmax(0,1fr)}}
+.lbl2{font-size:clamp(11px,1.05vw,13px);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+.pasos{counter-reset:s;list-style:none;padding:0;margin:0 0 12px;display:flex;flex-direction:column;gap:9px;max-width:none}
+.pasos li{counter-increment:s;position:relative;padding-left:38px;font-size:clamp(13px,1.3vw,16.5px);line-height:1.45;margin:0;color:var(--ink-2)}
+.pasos li::before{content:counter(s);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+:root[data-theme="dark"] .pasos li::before{color:#14191E}
+.m{font-family:var(--mono);font-weight:700;font-size:.9em;color:var(--brand);background:var(--brand-soft);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.spss{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface-1);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:var(--radius);padding:10px 14px;margin:0 0 12px}
+.spss .tag{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--brand);border:1px solid var(--brand);border-radius:4px;padding:1px 6px}
+.spss .r{font-family:var(--mono);font-size:clamp(12.5px,1.2vw,15.5px);color:var(--ink);overflow-wrap:anywhere}
+.vis{background:#FFFFFF;color:#000;border:1px solid #B9BFCC;border-radius:8px;padding:12px 14px;box-shadow:0 4px 18px rgba(10,16,40,.08);margin:0 0 10px;overflow-x:auto}
+.vis h6{font:700 clamp(12px,1.15vw,14.5px) Arial,Helvetica,sans-serif;margin:0 0 8px;color:#000;text-align:center}
+.vis table{border-collapse:collapse;width:100%;font:clamp(11px,1.05vw,13.5px) Arial,Helvetica,sans-serif;color:#000;font-variant-numeric:tabular-nums;max-width:none}
+.vis th{font-weight:400;border-bottom:1px solid #8A8F99;padding:5px 8px;text-align:right;vertical-align:bottom;color:#000}
+.vis td{padding:4px 8px;text-align:right;color:#000;border:0}
+.vis td.l{text-align:left;white-space:nowrap}
+.vis tr.hl td{background:#FFF0B8}
+.vis tr.b td{border-top:1px solid #8A8F99}
+.vis .vchart svg{display:block;width:100%;height:auto}
+.vpre{font:clamp(11px,1.1vw,14px)/1.35 Consolas,"Courier New",monospace;color:#000;margin:0;white-space:pre}
+.legend2 p{font-size:clamp(12px,1.15vw,14.5px);line-height:1.45;margin:4px 0 0}
+
+/* ---------- Portada, separadores y declaraciones ---------- */
+.slide.sep{background:var(--sep-bg);justify-content:center}
+.slide.sep::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--gold)}
+.slide.sep h1{color:var(--sep-ink);max-width:22ch}
+.slide.sep .eyebrow{color:var(--gold);font-size:clamp(13px,1.3vw,16px)}
+.slide.sep .lead,.slide.sep p{color:var(--sep-ink2)}
+.slide.sep b{color:var(--sep-ink)}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pills span,.pills a{font-family:var(--mono);font-size:clamp(11.5px,1.1vw,13.5px);padding:4px 11px;border-radius:999px;border:1px solid var(--sep-ink2);color:var(--sep-ink);text-decoration:none}
+.pills a:hover{background:rgba(255,255,255,.12)}
+.slide.oro{background:var(--gold);justify-content:center}
+.slide.oro h2{color:#1B2631;font-size:clamp(26px,4.2vw,56px)}
+.slide.oro .eyebrow,.slide.oro p{color:#2A2F3D}
+.slide.oro .lead{color:#2A2F3D}
+.who{font-size:clamp(13px,1.3vw,16.5px);line-height:1.6;color:var(--sep-ink2)}
+.mapa-card{text-decoration:none;color:inherit;border-bottom:0;display:block;transition:transform .15s,border-color .15s}
+.mapa-card:hover{transform:translateY(-2px);border-color:var(--brand)}
+.mapa-card p{font-size:clamp(12.5px,1.2vw,15px)}
+.qrbox{width:clamp(150px,18vw,230px);flex:none;color:#141B2E;background:#F6F5F1;padding:14px;border-radius:12px}
+.qrbox svg{display:block;width:100%;height:auto}
+.dl{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.dl a{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:7px;border:1px solid var(--sep-ink2);color:var(--sep-ink);font-family:var(--mono);font-size:clamp(11.5px,1.1vw,13.5px);text-decoration:none}
+.dl a:hover{background:rgba(255,255,255,.12)}
+.dl a.g{background:var(--gold);color:#1B2631;border-color:var(--gold);font-family:var(--font);font-weight:700}
+
+
+/* ---------- Esquema (HTML) ---------- */
+.esq{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;margin-top:6px}
+.esq-raiz{background:var(--brand);color:var(--surface-0);border-radius:12px;padding:18px 14px;text-align:center;font-size:clamp(14px,1.4vw,18px)}
+.esq-raiz b{color:inherit}
+.esq-rows{display:flex;flex-direction:column;gap:14px}
+.esq-row{display:grid;grid-template-columns:1fr 22px 1.25fr 22px 1.6fr;gap:8px;align-items:center}
+.esq-b{position:relative;background:var(--surface-1);border:1px solid var(--line-strong);border-radius:10px;padding:12px 14px;min-height:66px;display:flex;flex-direction:column;justify-content:center}
+.esq-b.tipo{background:var(--gold-soft);border-color:var(--gold)}
+.esq-b b{font-size:clamp(13px,1.3vw,17px);line-height:1.25}
+.esq-b small{font-size:clamp(11px,1.05vw,13px);color:var(--ink-3)}
+.esq-b em{position:absolute;right:10px;top:-11px;font-style:normal;font-size:12px;font-weight:700;background:var(--brand);color:var(--surface-0);border-radius:999px;padding:2px 8px;letter-spacing:.04em}
+.esq-row i{width:0;height:0;border-left:12px solid var(--ink-3);border-top:8px solid transparent;border-bottom:8px solid transparent;justify-self:center}
+@media(max-width:760px){.esq{grid-template-columns:minmax(0,1fr)}.esq-row{grid-template-columns:minmax(0,1fr)}.esq-row i{display:none}}
+
+/* ---------- Grabación y notas (ayudas del instructor) ---------- */
+body.grab{cursor:none}
+body.grab.mv{cursor:default}
+body.grab #marco-cab,body.grab #marco-pie,body.grab #marco-retoma{display:none!important}
+body.grab #deck{top:0!important;bottom:0!important}
+#notes{position:fixed;left:16px;bottom:72px;width:min(560px,calc(100vw - 32px));max-height:40vh;overflow:auto;background:var(--surface-1);
+  border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 18px 50px rgba(10,16,40,.22);z-index:65;display:none;padding:14px 18px;font-size:15px;line-height:1.5;color:var(--ink)}
+#notes.on{display:block}
+#notes h5{margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink)}
+
+/* ---------- Impresión ---------- */
+@media print{
+  @page{size:1280px 800px;margin:0}
+  body{overflow:visible;background:#fff}
+  #notes,.tip{display:none!important}
+  #deck{position:static;display:block}
+  .slide{display:flex!important;position:relative;inset:auto;page-break-after:always;break-after:page;min-height:800px;height:800px;width:1280px;animation:none;overflow:hidden;padding:36px 54px}
+  .slide:last-of-type{page-break-after:auto;break-after:auto}
+  #marco-cab,#marco-pie,#marco-indice,#marco-retoma{display:none!important}
+  .marco-pie-imp{position:fixed;bottom:6px;left:54px;font:9pt Arial;color:#566573}
+  .slide .card,.slide .callout{padding:12px 15px}
+  .slide p{margin-bottom:10px}
+  .slide .grid{gap:16px}
+}
+</style>
+<style id="unison">
+:root{--dfont:Arial,Helvetica,sans-serif;--bfont:Arial,Helvetica,sans-serif;--sans:Arial,Helvetica,sans-serif;--font:Arial,Helvetica,sans-serif}
+body{font-family:Arial,Helvetica,sans-serif}
+</style>
+<style id="adapta">
+#bar,#prog,#menu{display:none!important}
+#deck{top:var(--marco-cab,100px)!important;bottom:var(--marco-pie,56px)!important}
+.slide{padding-bottom:28px!important}
+@media print{#deck{top:0!important;bottom:auto!important}p{text-align:justify;hyphens:auto}}
+</style>
+<style id="paleta-dip">
+:root{--surface-0:#F4F3F0;--surface-1:#FFFFFF;--surface-2:#EEF1F4;--line:#DFE4EA;--line-strong:#C9D2DA;--ink:#1B2631;--ink-2:#3A4A5A;--ink-3:#566573;
+ --accent:#24398A;--brand:#24398A;--brand-soft:#E8EBF6;--gold:#E1B73D;--gold-soft:#FBF3DD;--warn:#B9770E;--ok:#1E8449;--bad:#C0392B;
+ --s1:#2980B9;--s2:#E67E22;--s3:#27AE60;--s4:#E1B73D;--s5:#8E44AD;--s1-soft:#D6EAF8;
+ --seq-100:#D6EAF8;--seq-200:#AED6F1;--seq-300:#85C1E9;--seq-400:#5DADE2;--seq-500:#2980B9;--seq-600:#24398A;--seq-700:#1B2631;
+ --red:#C0392B;--green:#27AE60;--orange:#E67E22;--brown:#B9770E;--navy:#24398A;
+ --bg:#F4F3F0;--surface:#FFFFFF;--ink-soft:#3A4A5A;--ink-faint:#566573;--rule:#DFE4EA;--accent-2:#24398A;--accent-soft:#D6EAF8;--gold-bright:#E1B73D;
+ --amber:#C0392B;--amber-ink:#C0392B;--amber-soft:#F2D7D5;--quiet:#566573;
+ --muted:#566573;--panel:#FFFFFF;--panel-2:#EEF1F4;--blue:#24398A;--teal:#1ABC9C;--purple:#8E44AD;
+ --blue-soft:#D6EAF8;--teal-soft:#D1F2EB;--amber-soft:#FAE5D3;--red-soft:#F2D7D5;--purple-soft:#E8DAEF}
+:root[data-theme="dark"]{--surface-0:#14191E;--surface-1:#1B222A;--surface-2:#232C35;--line:#2E3842;--line-strong:#3E4A56;--ink:#F2F4F6;--ink-2:#C4CDD5;--ink-3:#AEB6BF;
+ --accent:#8DA3C9;--brand:#8DA3C9;--brand-soft:#1C2440;--gold:#E1B73D;--gold-soft:#2E2718;--warn:#EB9950;--ok:#58D68D;--bad:#E06A5C;
+ --s1:#5DADE2;--s2:#EB9950;--s3:#58D68D;--s4:#E1B73D;--s5:#B07CD0;--s1-soft:#183446;
+ --seq-100:#1B2631;--seq-200:#24398A;--seq-300:#2980B9;--seq-400:#5DADE2;--seq-500:#85C1E9;--seq-600:#AED6F1;--seq-700:#D6EAF8;
+ --red:#E06A5C;--green:#58D68D;--orange:#EB9950;--brown:#D4AC6E;--navy:#8DA3C9;
+ --bg:#14191E;--surface:#1B222A;--ink-soft:#C4CDD5;--ink-faint:#AEB6BF;--rule:#2E3842;--accent-2:#8DA3C9;--accent-soft:#1C2440;--gold-bright:#E1B73D;
+ --amber:#E06A5C;--amber-ink:#E06A5C;--quiet:#AEB6BF;
+ --muted:#AEB6BF;--panel:#1B222A;--panel-2:#232C35;--blue:#8DA3C9;--teal:#48D1B6;--purple:#B07CD0;
+ --blue-soft:#183446;--teal-soft:#123A34;--amber-soft:#3D2C19;--red-soft:#3A1F1D;--purple-soft:#2B1F38}
+</style>
+<style id="portada-dip">
+.portada-dip{font-family:Arial,Helvetica,sans-serif;color:var(--m-tinta,#1B2631);width:min(1000px,100%);margin:0 auto;padding:clamp(4px,1vh,12px) clamp(12px,2vw,28px);text-align:left;display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - var(--marco-cab,100px) - var(--marco-pie,56px) - 72px);box-sizing:border-box}
+.portada-dip p{max-width:none!important}
+.portada-dip .pd-tit{max-width:24ch!important;font-size:clamp(28px,3.5vw,50px)!important;line-height:1.08!important}
+.portada-dip *{font-family:inherit;margin:0;text-align:left;hyphens:none;text-wrap:wrap!important}
+.portada-dip .pd-marca{display:flex;align-items:center;gap:clamp(12px,1.6vw,20px);padding-bottom:clamp(8px,1.4vh,14px);border-bottom:3px solid var(--m-oro,#E1B73D);margin-bottom:clamp(10px,2vh,22px)}
+.portada-dip .pd-marca img{width:clamp(48px,4.8vw,68px);height:auto;flex:0 0 auto}
+.portada-dip .pd-uni{font-size:clamp(17px,1.9vw,24px);font-weight:700;color:var(--m-azul,#24398A);line-height:1.2}
+.portada-dip .pd-dep{font-size:clamp(13px,1.3vw,17px);color:var(--m-gris,#566573);line-height:1.35}
+.portada-dip .pd-dip{font-size:clamp(13px,1.25vw,16px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--m-azul,#24398A);line-height:1.4;max-width:none}
+.portada-dip .pd-mod{display:inline-block;align-self:flex-start;margin-top:clamp(10px,2vh,20px);padding:.3em .8em;border-radius:999px;background:var(--m-azul,#24398A);color:#fff;font-size:clamp(13px,1.2vw,16px);font-weight:700;letter-spacing:.04em}
+.portada-dip .pd-tit{font-size:clamp(28px,3.5vw,50px);line-height:1.08;font-weight:800;letter-spacing:-.02em;color:var(--m-tinta,#1B2631);margin-top:clamp(8px,1.4vh,14px);max-width:24ch}
+.portada-dip .pd-apl{font-size:clamp(16px,1.6vw,22px);color:var(--m-gris,#566573);margin-top:clamp(6px,1vh,10px);line-height:1.35}
+.portada-dip .pd-inst{margin-top:clamp(12px,2.4vh,26px);padding-left:14px;border-left:4px solid var(--m-oro,#E1B73D);font-size:clamp(15px,1.5vw,19px);line-height:1.5}
+.portada-dip .pd-inst span{display:block;font-size:.78em;letter-spacing:.06em;text-transform:uppercase;color:var(--m-gris,#566573)}
+.portada-dip .pd-inst strong{color:var(--m-tinta,#1B2631)}
+.portada-dip .pd-pie{margin-top:clamp(12px,2.2vh,24px);font-size:clamp(11.5px,1vw,13.5px);color:var(--m-gris,#566573);line-height:1.6}
+.portada-dip .pd-pie kbd{font:inherit;font-size:.92em;padding:0 .35em;border:1px solid var(--m-linea,#D5D8DC);border-radius:4px}
+:root[data-theme="dark"] .portada-dip .pd-mod{color:#14191E}
+:root[data-theme="dark"] .portada-dip .pd-marca img{background:#fff;border-radius:8px;padding:3px}
+@media print{.portada-dip{min-height:0}}
+</style>
+<style id="marco">
+:root{--m-fondo:#FFFFFF;--m-tinta:#1B2631;--m-gris:#566573;--m-linea:#D5D8DC;--m-azul:#24398A;--m-oro:#E1B73D;
+  --m-si:#D5F5E3;--m-si-b:#27AE60;--m-no:#FAE5D3;--m-no-b:#E67E22;--m-panel:#F4F6F9}
+html[data-theme="dark"]{--m-fondo:#14191E;--m-tinta:#E8ECEF;--m-gris:#AEB6BF;--m-linea:#2E3842;--m-azul:#8DA3C9;--m-panel:#1B222A;
+  --m-si:#1C3326;--m-no:#3A2A1A}
+@media (prefers-color-scheme:dark){html:not([data-theme]){--m-fondo:#14191E;--m-tinta:#E8ECEF;--m-gris:#AEB6BF;--m-linea:#2E3842;--m-azul:#8DA3C9;--m-panel:#1B222A}}
+#marco-cab,#marco-pie,#marco-indice,#marco-retoma{font-family:Arial,Helvetica,sans-serif;color:var(--m-tinta)}
+#marco-cab{position:fixed;top:0;left:0;right:0;z-index:70;background:var(--m-fondo);border-top:4px solid var(--m-azul);box-shadow:0 1px 0 var(--m-linea)}
+.mc-fila{display:flex;align-items:center;gap:10px;padding:8px clamp(10px,2vw,22px);min-height:46px}
+.mc-marca{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--m-tinta);font-weight:700;font-size:15px;min-width:0}
+.mc-marca img{flex:none}
+#marco-cab a,#marco-indice a{text-decoration:none!important}#marco-cab a.mc-marca{border:0!important;box-shadow:none!important}#marco-cab a.mc-b,#marco-indice a.mc-b{border:1px solid var(--m-linea)!important}
+.mc-marca small{font-weight:400;color:var(--m-gris)}
+.mc-esp{flex:1}
+.mc-donde{font-size:12.5px;color:var(--m-gris);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw}
+.mc-b{font:inherit;font-size:14px;font-weight:700;color:var(--m-tinta);background:var(--m-fondo);border:1px solid var(--m-linea);border-radius:10px;padding:7px 12px;cursor:pointer;text-decoration:none;white-space:nowrap;line-height:1.2}
+.mc-b:hover,.mc-b:focus-visible{border-color:var(--m-azul);color:var(--m-azul);outline:none}
+.mc-regla{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;padding:6px clamp(10px,2vw,22px) 8px;overflow-x:auto;border-top:1px solid var(--m-linea);box-shadow:inset 0 -3px 0 var(--m-oro)}
+.mc-regla .t{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--m-gris);white-space:nowrap}
+.mc-regla .r{font-size:13px;font-weight:700;border:1px solid var(--m-linea);border-radius:999px;padding:4px 11px;white-space:nowrap;background:var(--m-fondo)}
+.mc-regla .r.si{background:var(--m-si);border-color:var(--m-si-b)}.mc-regla .r.no{background:var(--m-no);border-color:var(--m-no-b)}
+.mc-regla.min .r{display:none}
+.mc-regla .mc-b{padding:3px 10px;font-size:12.5px;margin-left:auto}
+#marco-cab.sin-regla .mc-regla{display:none}
+#marco-pie{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--m-fondo);border-top:1px solid var(--m-linea);
+  display:flex;align-items:center;gap:14px;padding:8px clamp(10px,2vw,22px);padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.mp-avance{flex:1;display:flex;align-items:center;gap:12px;min-width:0}
+.mp-barra{flex:1;height:6px;border-radius:6px;background:var(--m-linea);overflow:hidden}
+.mp-barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--m-azul),var(--m-oro));transition:width .25s}
+.mp-cont{font-size:13px;color:var(--m-gris);white-space:nowrap}
+#marco-pie .mc-b{font-size:18px;padding:6px 16px}
+#marco-indice{position:fixed;inset:0;z-index:80;background:var(--m-fondo);overflow-y:auto;display:none;padding:clamp(18px,3vw,40px)}
+#marco-indice.abierto{display:block}
+.mi-cab{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.mi-cab h2{font-size:clamp(20px,2.4vw,28px);margin:0;flex:1;color:var(--m-azul)}
+.mi-herr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 16px}
+.mi-herr span{font-size:13px;color:var(--m-gris)}
+.mi-herr .mc-b{font-size:13px;padding:5px 10px}
+.mi-lec{border:1px solid var(--m-linea);border-left:4px solid var(--m-azul);border-radius:10px;margin:0 0 8px;background:var(--m-panel)}
+.mi-lec>summary{cursor:pointer;list-style:none;display:flex;gap:12px;align-items:baseline;padding:10px 14px;font-weight:700}
+.mi-lec>summary::-webkit-details-marker{display:none}
+.mi-lec>summary .n{color:var(--m-azul);white-space:nowrap}
+.mi-lec>summary .r{margin-left:auto;font-weight:400;font-size:13px;color:var(--m-gris);white-space:nowrap}
+.mi-lec.actual{border-left-color:var(--m-oro)}
+.mi-lams{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px;padding:0 14px 12px}
+.mi-lams button{font:inherit;font-size:14px;text-align:left;background:var(--m-fondo);color:var(--m-tinta);border:1px solid var(--m-linea);border-radius:8px;padding:7px 10px;cursor:pointer}
+.mi-lams button .k{font-family:Consolas,"Courier New",monospace;color:var(--m-azul);font-weight:700;margin-right:6px}
+.mi-lams button[aria-current="true"]{border-color:var(--m-azul);box-shadow:inset 3px 0 0 var(--m-oro)}
+.mi-atajos{font-size:13px;color:var(--m-gris);margin:14px 0 0}
+.mi-atajos kbd{border:1px solid var(--m-linea);border-radius:4px;padding:0 5px;font-family:Consolas,"Courier New",monospace}
+.mi-det{margin-top:12px;border-top:1px solid var(--m-linea);padding-top:8px;font-size:13px;color:var(--m-gris)}
+.mi-det summary{cursor:pointer;font-weight:700}
+.mi-det table{border-collapse:collapse;width:100%}.mi-det th,.mi-det td{text-align:left;vertical-align:top;padding:3px 6px;border-bottom:1px solid var(--m-linea)}
+.mi-det td{overflow-wrap:anywhere}
+#marco-retoma{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--marco-pie,56px) + 12px);z-index:75;background:var(--m-fondo);
+  border:1px solid var(--m-linea);border-left:4px solid var(--m-oro);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.12);padding:10px 14px;
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px;max-width:calc(100vw - 24px)}
+#marco-retoma[hidden]{display:none}
+#marco-retoma .mc-b{font-size:13px;padding:5px 10px}
+.marco-pie-imp{display:none}
+html.proy{--m-tinta:#000}
+@media (max-width:760px){.mc-marca span,.mc-donde,.mc-b.g{display:none}.mc-fila{gap:6px}.mc-b{padding:7px 10px}}
+@media print{#marco-cab,#marco-pie,#marco-indice,#marco-retoma{display:none!important}.marco-pie-imp{display:block;font:9pt Arial;color:#566573}}
+</style>
+</head>
+<body>
+<div class="tip" id="tip"></div>
+<div id="notes"><h5>Notas del instructor</h5><div id="notes-b"></div></div>
+<main id="deck">
+
+<!-- ============ PORTADA ============ -->
+<section class="slide portada-dip-slide" data-sec="Portada" data-v="0" data-hook="portada"
+ data-notes="Portada homologada del diplomado. Úsala de fondo los primeros segundos de cada video mientras saludas.">
+  <div class="slide-inner"><div class="portada-dip"><div class="pd-marca"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAAC0CAMAAABMpVWqAAABIFBMVEXn2NXZlQ9WaatiX2Gg1ZwdOI+Zo8vezrIhOY2rlyLnrZwhOY0dOpDnGxuzj02qrrcEBn7KoW1bt1bsZ2UAAP94hrkAb293xHKJeEuHOGI3SHTgaRm7w9z6wQAgnxx1VS5sqSY2T6JDPIFjecCCyHohRZCNZS0gIiR9jMAAGHxVVarmP0DBv+UAAADoMTEXOJL8/PzrtgD4pwDmKCkAAAAmO4s0pzAFK4ybYwMAAAAuR5EAAAAAAADx6ewAAAAAAACTWgGwNU0AAABVWG5tOGytiTXUpxHGxspROXmneCjWMjpSaK7rV1f22NQAVarHNEMAPn6vdQvyl5bMhwHpR0ajagfud3Y7U5rQ6c5Iqzawt9TwiIb2trVStE2VNlrS1+i477XqAAAAYHRSTlP//////x7//17//6DW////Av///wH/Av///f//////////////Cf////8D//8A//7/////+v3///+v/44u/1Fv//7Q//3////9//7///8D/gT//////////////////f+YuRTTAAAfw0lEQVR42s1cB0MiybYuwsCAiiDmMDuzd8N9QbqVHBoQwVEBlWTC8P//xfvOqepIg86s++7Wzgo0RfXX53wnVBSHP1E2b6749dOnz5+XlpaWlzUuy8v48Pnzp0/8ZTJ59TNtix/+xdUN/f390+clhWO2LC8pVFdX638zoE1CcwUwdFtNy5+ft3deTlCur+nvy077/Dyfp680Bepq828ERM+bVJLJn++cXF9mMtlsdmVlJZuhv/wmc3l98nKeNyWFn92s/y2A1kk4nxhN/vzlBFioZMe99O102sv24kMq46y8nrl+aTOoJYaU/HBA62Do76ypfFuCyfKts086l+nY0PW+0OMSkPx7wpiWSUxXyQ8FRNL59JlJY4lG3jULIPGs0PXxVBfZ3nCazTgQKUx5EtM7+f0uQFekK2p455o4w7LJPvWljABo5RYimur9qS5BrghhAgKlXs6V5m4+CNDmOqQDOOcnhKY3fBrittlMX3+a0g3xupLW9eGUNMcUmj7pRsZGBDGZkK4+AhAaUXBwk3SUbtvPZHvMHLptXxcr+DQd6qL3lOllSWYoPScihpT/nHyH3sQ7tEXcOclIaehDonF8pfdk6FEm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" alt="Escudo de la Universidad de Sonora"><div><p class="pd-uni">Universidad de Sonora</p><p class="pd-dep">Departamento de Administración</p></div></div><p class="pd-dip">Diplomado · Herramientas Estadísticas Básicas para la Investigación en las Ciencias Económicas y Administrativas</p><p class="pd-mod">Módulo 2 · 20 h</p><h1 class="pd-tit">Estadística descriptiva con métodos tabulares y gráficos</h1><p class="pd-apl">Aplicada a la investigación económica</p><p class="pd-inst"><span>Imparte</span><strong>Jorge Alberto Muñan Valencia</strong></p><p class="pd-pie">Registro AA314016228 · Navega con <kbd>→</kbd> <kbd>←</kbd> · Índice con <kbd>M</kbd> · Tema con <kbd>T</kbd> · Pantalla completa con <kbd>F</kbd></p></div></div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section class="slide" data-sec="Las cinco lecciones" data-v="0"
+ data-notes="Mapa del módulo. Al inicio de cada video, señala en qué lección vamos. Cada lección sigue el mismo orden: concepto, ejemplo en SPSS paso a paso, resultado e interpretación.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">El módulo</p><h2>Cinco lecciones, siempre en el mismo orden</h2></div>
+    <div class="grid g5">
+      <a class="card tb mapa-card" href="#l4" data-go="v1"><div class="n">1</div><h3>Distribuciones de frecuencia</h3><p>2 ejemplos en SPSS</p></a>
+      <a class="card tb mapa-card" href="#l11" data-go="v2"><div class="n">2</div><h3>Tablas y clases</h3><p>2 ejemplos en SPSS</p></a>
+      <a class="card tb mapa-card" href="#l18" data-go="v3"><div class="n">3</div><h3>Barras y pastel</h3><p>2 ejemplos en SPSS</p></a>
+      <a class="card tb mapa-card" href="#l23" data-go="v4"><div class="n">4</div><h3>Histograma, polígono, ojiva, tallo y hoja</h3><p>3 ejemplos en SPSS</p></a>
+      <a class="card tg mapa-card" href="#l31" data-go="v5"><div class="n">5</div><h3>Dispersión</h3><p>1 ejemplo en SPSS</p></a>
+    </div>
+    <div class="flow">
+      <div><b>1</b>Concepto</div><i></i><div><b>2</b>Ejemplo en SPSS paso a paso</div><i></i><div><b>3</b>Lo que debe salir en el Visor</div><i></i><div><b>4</b>Cómo se interpreta</div>
+    </div>
+    <p class="small muted mt">Bases y ejemplos: Anderson, Sweeney y Williams, <i>Estadística para negocios y economía</i>, cap. 2. Software: IBM SPSS Statistics 25 o superior, en español.</p>
+  </div>
+</section>
+
+<!-- ============ ESQUEMA ============ -->
+<section class="slide alt" data-sec="El tipo de dato manda" data-v="0"
+ data-notes="La idea que amarra todo el módulo: antes de elegir tabla o gráfico, pregúntate qué tipo de variable tienes. Recorre el esquema de izquierda a derecha.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">La idea central</p><h2>El tipo de dato manda: decide qué tabla y qué gráfico son válidos</h2></div>
+    <div class="chart" id="ch-mapa"></div>
+  </div>
+</section>
+
+<!-- ============ LECCIÓN 1 ============ -->
+<section class="slide sep" data-sec="Lección 1" data-v="1" data-hook="sep"
+ data-notes="Inicio de la lección 1 (video 1). Lee la ruta: así vamos a avanzar.">
+  <div class="slide-inner">
+    <p class="eyebrow">Lección 1</p>
+    <h1>Distribuciones de frecuencia</h1>
+    <p class="lead">Absolutas, relativas, porcentuales y acumuladas</p>
+    <ol class="agenda" data-v="1"></ol>
+    <div class="pills"><span>SoftDrink.sav</span><span>Audit.sav</span></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Qué es una distribución de frecuencia" data-v="1" data-step="1"
+ data-notes="Concepto. La tabla no agrega información: reorganiza la que ya hay para que se vea el patrón.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto</p><h2>Una distribución de frecuencia dice cuántos datos caen en cada categoría</h2></div>
+    <div class="grid g-6-4">
+      <div><p class="small muted">50 compras de refresco, tal como vienen en la base (primeras 20):</p><div class="chips" id="raw-soft"></div>
+        <p class="small">No agrega información: <b>reorganiza</b> la que ya hay para que se vea el patrón.</p></div>
+      <div class="tbl-wrap"><table class="t"><tr><th>Marca</th><th>Compras</th></tr>
+        <tr><td>Coke Classic</td><td>19</td></tr><tr><td>Diet Coke</td><td>8</td></tr><tr><td>Dr. Pepper</td><td>5</td></tr>
+        <tr><td>Pepsi</td><td>13</td></tr><tr><td>Sprite</td><td>5</td></tr><tr class="tot"><td>Total</td><td>50</td></tr></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Las cuatro formas (interactiva)" data-v="1" data-step="2"
+ data-notes="Concepto. Pulsa cada botón en orden. En Acumulada, detente: con marcas el orden es arbitrario, así que ese acumulado no dice nada.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva · SoftDrink.sav</p><h2>La misma tabla, cuatro formas de expresarla</h2></div>
+    <div class="ctrl"><span class="lbl">Ver</span><div class="seg" id="seg-forma">
+      <button data-k="abs" class="on">Absoluta</button><button data-k="rel">Relativa</button><button data-k="pct">Porcentual</button><button data-k="acu">Acumulada</button></div></div>
+    <div class="grid g-6-4">
+      <div class="tbl-wrap"><table class="t" id="tb-formas"></table></div>
+      <div>
+        <div class="card"><h3 id="fm-t">Absoluta</h3><p class="formula" id="fm-f">f</p><p class="mb0" id="fm-x"></p></div>
+        <div class="note" id="fm-w" style="display:none"><p><b>Ojo:</b> las marcas no tienen orden. Si las acomodo de otra manera, el acumulado cambia. Aquí no significa nada.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 1 en SPSS: frecuencias de la marca" data-v="1" data-step="3"
+ data-notes="Ejemplo 1 en vivo. Primero la Vista de variables: Marca es nominal y tiene etiquetas. Luego Frecuencias. En el Visor señala las cuatro columnas.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 1 en SPSS · SoftDrink.sav</p><h2>Tabla de frecuencias de la marca de refresco</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › SoftDrink.sav</li>
+        <li>Pestaña <span class="m">Vista de variables</span>: revisa que Marca tenga medida <b>Nominal</b> y etiquetas en <b>Valores</b></li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span></li>
+        <li>Pasa <b>Marca</b> a la lista Variables</li>
+        <li>Deja marcada <b>Mostrar tablas de frecuencias</b> › Aceptar</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p>
+        <div class="vis"><h6>Marca</h6><table>
+          <tr><th></th><th></th><th>Frecuencia</th><th>Porcentaje</th><th>Porcentaje válido</th><th>Porcentaje acumulado</th></tr>
+          <tr><td class="l">Válido</td><td class="l">Coke Classic</td><td>19</td><td>38.0</td><td>38.0</td><td>38.0</td></tr>
+          <tr><td></td><td class="l">Diet Coke</td><td>8</td><td>16.0</td><td>16.0</td><td>54.0</td></tr>
+          <tr><td></td><td class="l">Dr. Pepper</td><td>5</td><td>10.0</td><td>10.0</td><td>64.0</td></tr>
+          <tr><td></td><td class="l">Pepsi</td><td>13</td><td>26.0</td><td>26.0</td><td>90.0</td></tr>
+          <tr><td></td><td class="l">Sprite</td><td>5</td><td>10.0</td><td>10.0</td><td>100.0</td></tr>
+          <tr class="b"><td></td><td class="l">Total</td><td>50</td><td>100.0</td><td>100.0</td><td></td></tr></table></div>
+        <div class="legend2">
+          <p><b>Frecuencia</b> = absoluta · <b>Porcentaje</b> = porcentual sobre todos los casos</p>
+          <p><b>Porcentaje válido</b> = sin los perdidos (aquí no hay, por eso son iguales)</p>
+          <p><b>Porcentaje acumulado</b> = acumulada; en una nominal como Marca <b>no se interpreta</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="La acumulada (interactiva)" data-v="1" data-step="4"
+ data-notes="Concepto del ejemplo 2. Mueve el control a 19: doce de veinte, 60 %. Luego a 24: 85 %. Aquí sí tiene sentido acumular porque los días tienen orden.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva · Audit.sav · 20 auditorías</p><h2>Con datos ordenados, la acumulada responde «¿cuántos hasta aquí?»</h2></div>
+    <div class="ctrl"><span class="lbl">Hasta</span><input type="range" id="rg-acu" min="12" max="33" value="19" aria-label="Días"><span class="val" id="rg-acu-v">19</span><span class="small muted">días</span></div>
+    <div class="grid g-6-4">
+      <div><p class="small muted">Duración de cada auditoría, ordenada de menor a mayor:</p><div class="chips" id="chips-audit"></div></div>
+      <div><div class="stat" id="acu-pct">60 %</div><p id="acu-txt">de las auditorías duró 19 días o menos (12 de 20).</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 2 en SPSS: la acumulada de Audit" data-v="1" data-step="5"
+ data-notes="Ejemplo 2 en vivo. Mismo procedimiento con otra base. En el Visor busca el renglón 19: 60.0 en Porcentaje acumulado.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 2 en SPSS · Audit.sav</p><h2>Frecuencias de la duración de 20 auditorías</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › Audit.sav</li>
+        <li>En <span class="m">Vista de variables</span>, Duracion debe tener medida <b>Escala</b></li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span></li>
+        <li>Si sigue Marca en la lista, regrésala con la flecha. Pasa <b>Duracion</b> a Variables</li>
+        <li>Aceptar y busca el renglón <b>19</b> en Porcentaje acumulado</li>
+      </ol>
+      <div class="note"><p>Cada valor sale una o dos veces: la tabla resume poco. En la lección 2 la agrupamos en clases.</p></div></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor (extracto)</p>
+        <div class="vis"><h6>Duracion</h6><table>
+          <tr><th></th><th></th><th>Frecuencia</th><th>Porcentaje</th><th>Porcentaje válido</th><th>Porcentaje acumulado</th></tr>
+          <tr><td class="l">Válido</td><td class="l">12</td><td>1</td><td>5.0</td><td>5.0</td><td>5.0</td></tr>
+          <tr><td></td><td class="l">13</td><td>1</td><td>5.0</td><td>5.0</td><td>10.0</td></tr>
+          <tr><td></td><td class="l">14</td><td>2</td><td>10.0</td><td>10.0</td><td>20.0</td></tr>
+          <tr><td></td><td class="l">15</td><td>2</td><td>10.0</td><td>10.0</td><td>30.0</td></tr>
+          <tr><td></td><td class="l">16</td><td>1</td><td>5.0</td><td>5.0</td><td>35.0</td></tr>
+          <tr><td></td><td class="l">17</td><td>1</td><td>5.0</td><td>5.0</td><td>40.0</td></tr>
+          <tr><td></td><td class="l">18</td><td>3</td><td>15.0</td><td>15.0</td><td>55.0</td></tr>
+          <tr class="hl"><td></td><td class="l">19</td><td>1</td><td>5.0</td><td>5.0</td><td>60.0</td></tr>
+          <tr><td></td><td class="l">…</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td class="l">33</td><td>1</td><td>5.0</td><td>5.0</td><td>100.0</td></tr>
+          <tr class="b"><td></td><td class="l">Total</td><td>20</td><td>100.0</td><td>100.0</td><td></td></tr></table></div>
+        <p class="small"><b>Lectura:</b> el 60 % de las auditorías duró 19 días o menos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide oro" data-sec="En la investigación económica" data-v="1" data-step="6" data-hook="oro"
+ data-notes="Interpretación y cierre de la lección 1.">
+  <div class="slide-inner">
+    <p class="eyebrow">Cómo se usa en investigación</p>
+    <h2>La tabla de frecuencias suele ser la Tabla 1 de un artículo: dice quién está en la muestra antes de cualquier modelo</h2>
+    <p class="lead">Empresas por sector y tamaño · hogares por decil de ingreso · trabajadores por escolaridad</p>
+  </div>
+</section>
+
+<!-- ============ LECCIÓN 2 ============ -->
+<section class="slide sep" data-sec="Lección 2" data-v="2" data-hook="sep"
+ data-notes="Inicio de la lección 2 (video 2). Lee la ruta.">
+  <div class="slide-inner">
+    <p class="eyebrow">Lección 2</p>
+    <h1>Tablas para datos cualitativos y cuantitativos</h1>
+    <p class="lead">Agrupación en clases</p>
+    <ol class="agenda" data-v="2"></ol>
+    <div class="pills"><span>Restaurant.sav</span><span>Audit.sav</span></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Cualitativa o cuantitativa" data-v="2" data-step="1"
+ data-notes="Concepto. El tipo de variable decide si solo contamos o si primero hay que agrupar.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto</p><h2>El tipo de variable decide qué tabla se hace</h2></div>
+    <div class="grid g2">
+      <div class="card tb"><h3>Cualitativa</h3>
+        <p>Las categorías ya existen: <b>solo se cuenta</b>.</p>
+        <p><b>Nominal</b> (marca, forma de pago): sin orden, sin acumulada.</p>
+        <p class="mb0"><b>Ordinal</b> (calidad, satisfacción): con orden; la acumulada sí se lee.</p></div>
+      <div class="card tg"><h3>Cuantitativa</h3>
+        <p>Hay muchos valores distintos: <b>primero se definen clases</b>.</p>
+        <p>Duración en días, ingreso, edad, número de empleados.</p>
+        <p class="mb0">En SPSS su medida es <b>Escala</b>; las clases se crean como variable nueva.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 1 en SPSS: una ordinal" data-v="2" data-step="2"
+ data-notes="Ejemplo 1 en vivo. Restaurant, Calidad. En la salida lee el acumulado: 78 % es Muy buena o menos; solo 22 % es Excelente.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 1 en SPSS · Restaurant.sav · 300 restaurantes</p><h2>Tabla de frecuencias de una variable ordinal</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › Restaurant.sav</li>
+        <li>En <span class="m">Vista de variables</span>, Calidad debe ser <b>Ordinal</b> con etiquetas 1 = Buena, 2 = Muy buena, 3 = Excelente</li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span></li>
+        <li>Pasa <b>Calidad</b> a Variables › Aceptar</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p>
+        <div class="vis"><h6>Calidad</h6><table>
+          <tr><th></th><th></th><th>Frecuencia</th><th>Porcentaje</th><th>Porcentaje válido</th><th>Porcentaje acumulado</th></tr>
+          <tr><td class="l">Válido</td><td class="l">Buena</td><td>84</td><td>28.0</td><td>28.0</td><td>28.0</td></tr>
+          <tr class="hl"><td></td><td class="l">Muy buena</td><td>150</td><td>50.0</td><td>50.0</td><td>78.0</td></tr>
+          <tr><td></td><td class="l">Excelente</td><td>66</td><td>22.0</td><td>22.0</td><td>100.0</td></tr>
+          <tr class="b"><td></td><td class="l">Total</td><td>300</td><td>100.0</td><td>100.0</td><td></td></tr></table></div>
+        <div class="note"><p><b>Lectura:</b> aquí la acumulada sí se lee porque hay orden. El 78 % es «Muy buena» o menos; solo el 22 % alcanza «Excelente».</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Tres decisiones para agrupar" data-v="2" data-step="3"
+ data-notes="Concepto. El redondeo de 4.2 a 5 es por legibilidad: 5 × 4.2 = 21 = 33 − 12 exactamente, así que no es para que quepan los datos.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · Audit.sav · de 12 a 33 días</p><h2>Agrupar en clases exige tres decisiones</h2></div>
+    <div class="grid g3">
+      <div class="card"><div class="n">1</div><h3>¿Cuántas clases?</h3><p class="mb0">Entre 5 y 20. Con 20 datos, <b>5 clases</b>.</p></div>
+      <div class="card"><div class="n">2</div><h3>¿De qué ancho?</h3><p class="formula">(33 − 12) ÷ 5 = 4.2</p><p class="mb0">Lo redondeo a <b>5</b> por legibilidad: de 5 en 5 se lee mejor.</p></div>
+      <div class="card"><div class="n">3</div><h3>¿Dónde empezar?</h3><p class="mb0">En <b>10</b>, un número redondo por debajo del mínimo. Sin traslapes y sin huecos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="El ancho de clase (interactiva)" data-v="2" data-step="4"
+ data-notes="Concepto. Mueve el ancho a 2: demasiado detalle. A 10: se pierde la forma. Regresa a 5, que es el que vamos a construir en SPSS.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva · Audit.sav</p><h2>El ancho de clase puede mostrar el patrón o esconderlo</h2></div>
+    <div class="ctrl"><span class="lbl">Ancho de clase</span><input type="range" id="rg-w" min="2" max="11" value="5" aria-label="Ancho de clase"><span class="val" id="rg-w-v">5</span><span class="small muted">días · inicio en 10</span></div>
+    <div class="grid g-6-4">
+      <div class="chart" id="ch-ancho"></div>
+      <div><div class="card"><h3 id="an-k">5 clases</h3><p class="mb0" id="an-m"></p></div><p class="msg mt-s" id="an-msg"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 2 en SPSS: agrupar en clases" data-v="2" data-step="5"
+ data-notes="Ejemplo 2 en vivo. Haz los pasos despacio; el cuadro de Agrupación visual confunde la primera vez. Al final muestra la columna nueva en Vista de datos. Alternativa que puedes mencionar: Transformar › Recodificar en distintas variables, rango 10 hasta 14 = 1, 15 hasta 19 = 2, y así.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 2 en SPSS · Audit.sav</p><h2>Crear las cinco clases con Agrupación visual</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li>Con Audit.sav abierto: <span class="m">Transformar › Agrupación visual</span></li>
+        <li>Pasa <b>Duracion</b> a «Variables para agrupar» › Continuar</li>
+        <li>Selecciona Duracion en la lista. En «Variable agrupada» escribe <b>Duracion_clases</b></li>
+        <li>Botón <span class="m">Crear puntos de corte</span> › Intervalos de igual amplitud: primer punto <b>14</b>, número de puntos <b>4</b>, amplitud <b>5</b> › Aplicar</li>
+        <li>Puntos finales superiores: <b>Incluido (&lt;=)</b> › botón <span class="m">Crear etiquetas</span> › Aceptar</li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span> con <b>Duracion_clases</b> › Aceptar</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p>
+        <div class="vis"><h6>Duracion (agrupada)</h6><table>
+          <tr><th></th><th></th><th>Frecuencia</th><th>Porcentaje</th><th>Porcentaje válido</th><th>Porcentaje acumulado</th></tr>
+          <tr><td class="l">Válido</td><td class="l">&lt;= 14</td><td>4</td><td>20.0</td><td>20.0</td><td>20.0</td></tr>
+          <tr class="hl"><td></td><td class="l">15 - 19</td><td>8</td><td>40.0</td><td>40.0</td><td>60.0</td></tr>
+          <tr><td></td><td class="l">20 - 24</td><td>5</td><td>25.0</td><td>25.0</td><td>85.0</td></tr>
+          <tr><td></td><td class="l">25 - 29</td><td>2</td><td>10.0</td><td>10.0</td><td>95.0</td></tr>
+          <tr><td></td><td class="l">30+</td><td>1</td><td>5.0</td><td>5.0</td><td>100.0</td></tr>
+          <tr class="b"><td></td><td class="l">Total</td><td>20</td><td>100.0</td><td>100.0</td><td></td></tr></table></div>
+        <p class="small muted">Las etiquetas pueden variar un poco según tu versión: la primera clase es 10–14 y la última 30–34.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Interpretación de la tabla agrupada" data-v="2" data-step="6"
+ data-notes="Interpretación y cierre de la lección 2. Esta es la tabla que va en un informe: con clases, con relativa y con acumulada.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Interpretación</p><h2>El 85 % de las auditorías dura 24 días o menos</h2></div>
+    <div class="tbl-wrap"><table class="t lg"><tr><th>Duración (días)</th><th>Frecuencia</th><th>Relativa</th><th>Porcentaje</th><th>% acumulado</th></tr>
+      <tr><td>10–14</td><td>4</td><td>0.20</td><td>20</td><td>20</td></tr>
+      <tr class="hl"><td><b>15–19</b> · clase modal</td><td><b>8</b></td><td><b>0.40</b></td><td><b>40</b></td><td>60</td></tr>
+      <tr><td>20–24</td><td>5</td><td>0.25</td><td>25</td><td><b>85</b></td></tr>
+      <tr><td>25–29</td><td>2</td><td>0.10</td><td>10</td><td>95</td></tr>
+      <tr><td>30–34</td><td>1</td><td>0.05</td><td>5</td><td>100</td></tr>
+      <tr class="tot"><td>Total</td><td>20</td><td>1.00</td><td>100</td><td></td></tr></table></div>
+    <p>En economía pasa lo mismo con rangos de ingreso, de edad o de personal ocupado. La pregunta es siempre: <b>¿mis clases dejan ver el patrón o lo esconden?</b></p>
+  </div>
+</section>
+
+<!-- ============ LECCIÓN 3 ============ -->
+<section class="slide sep" data-sec="Lección 3" data-v="3" data-hook="sep"
+ data-notes="Inicio de la lección 3 (video 3). Lee la ruta. Al gráfico de pastel también se le llama circular; así aparece en el menú de SPSS.">
+  <div class="slide-inner">
+    <p class="eyebrow">Lección 3</p>
+    <h1>Gráfico de barras y gráfico de pastel</h1>
+    <p class="lead">Gráficos para datos categóricos. Al de pastel también se le llama circular.</p>
+    <ol class="agenda" data-v="3"></ol>
+    <div class="pills"><span>SoftDrink.sav</span><span>PelicanStores.sav</span></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Barras o pastel (interactiva)" data-v="3" data-step="1"
+ data-notes="Concepto. Refrescos en barras; cambia el orden. Luego Forma de pago en pastel: Discover y American Express casi no se ven. Termina con Tipo de cliente en pastel: ahí sí funciona.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva</p><h2 id="gr-h">Ordenadas de mayor a menor, el ranking se ve de inmediato</h2></div>
+    <div class="ctrl">
+      <span class="lbl">Datos</span><div class="seg" id="seg-ds"><button data-k="soft" class="on">Refrescos</button><button data-k="pago">Forma de pago</button><button data-k="tipo">Tipo de cliente</button></div>
+      <span class="lbl">Gráfico</span><div class="seg" id="seg-tipo"><button data-k="bar" class="on">Barras</button><button data-k="pie">Pastel</button></div>
+      <span class="lbl">Orden</span><div class="seg" id="seg-ord"><button data-k="cod">Códigos</button><button data-k="desc" class="on">Mayor a menor</button></div>
+    </div>
+    <div class="grid g-6-4">
+      <div class="chart" id="ch-cat"></div>
+      <div><div class="leg" id="lg-cat"></div><p class="msg" id="cat-msg"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="¿Barras o pastel?" data-v="3" data-step="2"
+ data-notes="Concepto. El criterio antes de pasar a SPSS.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · criterio de uso</p><h2>¿Barras o pastel? Depende de la pregunta</h2></div>
+    <div class="grid g2">
+      <div class="card tb"><h3>Barras</h3><p><b>¿Qué categoría pesa más que otra?</b></p>
+        <ul class="mb0"><li>Cualquier número de categorías</li><li>Nominal: de mayor a menor</li><li>Ordinal: en su orden natural</li><li>Barras separadas: no hay continuo</li></ul></div>
+      <div class="card tg"><h3>Pastel (circular)</h3><p><b>¿Qué parte del total es cada una?</b></p>
+        <ul><li>Cinco categorías como máximo</li><li>Las partes suman un todo</li><li>1 % del total = 3.6 grados de la rebanada</li></ul>
+        <p class="mb0">El ojo compara alturas mucho mejor que ángulos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 1 en SPSS: barras desde Frecuencias" data-v="3" data-step="3"
+ data-notes="Ejemplo 1 en vivo. La forma más rápida. Señala que las barras salen en el orden de los códigos.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 1 en SPSS · SoftDrink.sav</p><h2>Gráfico de barras, la vía rápida</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › SoftDrink.sav</li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span> y pasa <b>Marca</b> a Variables</li>
+        <li>Botón <span class="m">Gráficos</span> › marca <b>Gráficos de barras</b></li>
+        <li>Valores del gráfico: <b>Porcentajes</b> › Continuar</li>
+        <li>Aceptar</li>
+      </ol>
+      <div class="note"><p>Sale en el orden de los códigos (1 a 5). Si quieres el ranking de mayor a menor, se hace con <span class="m">Gráficos › Generador de gráficos</span>, ordenando el eje X por estadístico.</p></div></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p><div class="vis"><h6>Marca</h6><div class="vchart" id="mini-v3a"></div></div>
+        <p class="small"><b>Lectura:</b> Coca-Cola concentra 38 % de las compras; Pepsi le sigue con 26 %.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide alt" data-sec="Ejemplo 2 en SPSS: gráfico de pastel con porcentajes" data-v="3" data-step="4"
+ data-notes="Ejemplo 2 en vivo. Al terminar, contrasta: con cinco categorías las rebanadas chicas no se distinguen. Repite con Tipo de cliente para mostrar un sector bien usado.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 2 en SPSS · PelicanStores.sav · 100 compras</p><h2>Gráfico de pastel de la forma de pago</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › PelicanStores.sav</li>
+        <li><span class="m">Gráficos › Cuadros de diálogo antiguos › Circular</span></li>
+        <li>Elige <b>Resúmenes para grupos de casos</b> › Definir</li>
+        <li>Los sectores representan: <b>% de casos</b>. Pasa <b>FormaPago</b> a «Definir sectores por» › Aceptar</li>
+        <li>Doble clic en el gráfico › <span class="m">Elementos › Mostrar etiquetas de datos</span> › cierra el editor</li>
+        <li>Repite con <b>Tipo</b> de cliente: dos categorías, un pastel bien usado</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p><div class="vis"><div class="vchart" id="mini-v3c"></div></div>
+        <p class="small"><b>Lectura:</b> 70 % pagó con la tarjeta de la tienda. Discover (4 %) y American Express (2 %) casi no se ven.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LECCIÓN 4 ============ -->
+<section class="slide sep" data-sec="Lección 4" data-v="4" data-hook="sep"
+ data-notes="Inicio de la lección 4 (video 4). Lee la ruta. El polígono se explica en la lámina interactiva del histograma; no lleva ejemplo propio en SPSS.">
+  <div class="slide-inner">
+    <p class="eyebrow">Lección 4</p>
+    <h1>Histograma, polígono, ojiva y tallo y hoja</h1>
+    <p class="lead">La forma de una variable cuantitativa</p>
+    <ol class="agenda" data-v="4"></ol>
+    <div class="pills"><span>Audit.sav</span><span>PelicanStores.sav</span></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Cuatro gráficos, cuatro preguntas" data-v="4" data-step="1"
+ data-notes="Concepto. Vuelve a esta lámina al cerrar la lección.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto</p><h2>La pregunta ya no es qué categoría gana, sino qué forma tiene la distribución</h2></div>
+    <div class="tbl-wrap"><table class="t left lg"><tr><th style="width:24%">Gráfico</th><th style="width:46%">Responde</th><th>Cuándo usarlo</th></tr>
+      <tr><td><b>Histograma</b></td><td>¿Dónde se concentran los datos y hacia dónde se alarga la cola?</td><td>Siempre, como primer vistazo</td></tr>
+      <tr><td><b>Polígono</b></td><td>La misma forma, dibujada como línea</td><td>Para encimar dos distribuciones</td></tr>
+      <tr><td><b>Ojiva</b></td><td>¿Qué porcentaje queda por debajo de un valor?</td><td>Para leer acumulados</td></tr>
+      <tr><td><b>Tallo y hoja</b></td><td>La forma, sin perder ningún dato</td><td>Muestras pequeñas</td></tr></table></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Histograma y polígono (interactiva)" data-v="4" data-step="2"
+ data-notes="Concepto. Empieza en Histograma: pico en 15–19, cola a la derecha. Pasa a Ambos: el polígono une las marcas de clase. Termina en Polígono.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva · Audit.sav</p><h2>Pico en 15–19 días y una cola hacia la derecha</h2></div>
+    <div class="ctrl"><span class="lbl">Ver</span><div class="seg" id="seg-hp"><button data-k="h" class="on">Histograma</button><button data-k="a">Ambos</button><button data-k="p">Polígono</button></div></div>
+    <div class="grid g-6-4">
+      <div class="chart" id="ch-hp"></div>
+      <div><p id="hp-1"></p><p class="small" id="hp-2"></p><p class="small muted">SPSS no trae un botón de polígono: se construye con un gráfico de líneas a partir de la tabla de clases. En esta lección lo vemos como concepto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 1 en SPSS: histograma" data-v="4" data-step="3"
+ data-notes="Ejemplo 1 en vivo. SPSS elige sus propias clases; muéstralo y luego cámbialas en el Editor para que coincidan con las de la tabla. Si al hacer doble clic no aparece la pestaña Agrupación, da un clic sobre las barras para seleccionarlas y abre Edición › Propiedades.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 1 en SPSS · Audit.sav</p><h2>Histograma con nuestras clases de 5 días</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › Audit.sav</li>
+        <li><span class="m">Analizar › Estadísticos descriptivos › Frecuencias</span>, <b>Duracion</b> a Variables, desmarca «Mostrar tablas de frecuencias»</li>
+        <li>Botón <span class="m">Gráficos</span> › <b>Histogramas</b> › Continuar › Aceptar</li>
+        <li>SPSS elige sus clases. Doble clic en el histograma para abrir el Editor</li>
+        <li>Doble clic sobre las barras: se abre la ventana <b>Propiedades</b>. Pestaña <b>Agrupación</b> › Eje X: <b>Personalizado</b> › <b>Amplitud del intervalo</b> = 5 › marca <b>Valor personalizado para anclaje</b> = 9.5 › Aplicar › cierra el editor</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p><div class="vis"><h6>Histograma</h6><div class="vchart" id="mini-v4a"></div></div>
+        <p class="small"><b>Lectura:</b> pico en 15–19 días y cola hacia la derecha (sesgo positivo).</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" data-sec="La ojiva (interactiva)" data-v="4" data-step="4"
+ data-notes="Concepto. Mueve el control a 19.5: 60 %. A 24.5: 85 %. Va sobre las fronteras de clase porque la duración se registró en días enteros.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva · Audit.sav</p><h2>La ojiva lee porcentajes acumulados de un vistazo</h2></div>
+    <div class="ctrl"><span class="lbl">Valor</span><input type="range" id="rg-oj" min="9.5" max="34.5" step="0.5" value="19.5" aria-label="Días"><span class="val" id="rg-oj-v">19.5</span><span class="small muted">días</span></div>
+    <div class="grid g-6-4">
+      <div class="chart" id="ch-oj"></div>
+      <div><div class="stat" id="oj-pct">60 %</div><p id="oj-txt"></p><p class="small">Va sobre las <b>fronteras</b> 9.5, 14.5, 19.5…: la duración se registró en días enteros.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 2 en SPSS: ojiva" data-v="4" data-step="5"
+ data-notes="Ejemplo 2 en vivo. Usa Duracion_clases, la variable que creamos en la lección 2. Si no está en la base, repite Transformar › Agrupación visual. En el Visor, la línea sube de 20 a 100 %: SPSS la dibuja sobre las clases y no agrega el punto inicial en cero.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 2 en SPSS · Audit.sav</p><h2>Ojiva: una línea del porcentaje acumulado por clase</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li>Con Audit.sav abierto, revisa que exista <b>Duracion_clases</b> (la creamos en la lección 2). Si no está: <span class="m">Transformar › Agrupación visual</span>, igual que entonces</li>
+        <li><span class="m">Gráficos › Cuadros de diálogo antiguos › Línea</span></li>
+        <li><b>Simple</b> y <b>Resúmenes para grupos de casos</b> › Definir</li>
+        <li>La línea representa: <b>% acum.</b></li>
+        <li>Eje de categorías: <b>Duracion_clases</b> › Aceptar</li>
+        <li>Opcional: doble clic en el gráfico › <span class="m">Elementos › Mostrar marcadores</span></li>
+      </ol>
+      <div class="note"><p>SPSS dibuja la ojiva sobre las clases, de 20 % a 100 %. El punto inicial en cero (la frontera 9.5) no aparece; en un informe se agrega a mano o se menciona en el texto.</p></div></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p><div class="vis"><div class="vchart" id="mini-v4c"></div></div>
+        <p class="small"><b>Lectura:</b> hasta la clase 15–19 va en 60 %; hasta 20–24, en 85 %.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Tallo y hoja (interactiva)" data-v="4" data-step="6"
+ data-notes="Concepto. Audit con un renglón por tallo. Luego Edad de clientes y Divididos, que es como lo presenta SPSS con muchos datos. Señala que todas las hojas son pares.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva</p><h2>El tallo y hoja ordena los datos y dibuja su forma sin perder ninguno</h2></div>
+    <div class="ctrl">
+      <span class="lbl">Datos</span><div class="seg" id="seg-st"><button data-k="audit" class="on">Auditorías (días)</button><button data-k="edad">Edad de clientes</button></div>
+      <span class="lbl">Tallos</span><div class="seg" id="seg-sp"><button data-k="1" class="on">Uno por decena</button><button data-k="2">Divididos</button></div>
+    </div>
+    <div class="grid g-6-4">
+      <div class="stem" id="stem"></div>
+      <div><p id="st-1"></p><p class="small" id="st-2"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo 3 en SPSS: tallo y hoja" data-v="4" data-step="7"
+ data-notes="Ejemplo 3 en vivo. El tallo y hoja está en Explorar, no en Frecuencias. Lee la nota al pie de la salida: ancho del tallo y casos por hoja.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo 3 en SPSS · Audit.sav</p><h2>Tallo y hoja con Explorar</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li>Con Audit.sav abierto: <span class="m">Analizar › Estadísticos descriptivos › Explorar</span></li>
+        <li><b>Duracion</b> a «Lista de dependientes»</li>
+        <li>Abajo, en Visualización, marca <b>Gráficos</b></li>
+        <li>Botón <span class="m">Gráficos</span>: Diagramas de caja = Ninguno; Descriptivos = <b>Tallo y hojas</b> › Continuar › Aceptar</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p>
+        <div class="vis"><h6>Duracion: gráfico de tallo y hojas</h6><pre class="vpre"> Frecuencia    Tallo &amp;  Hoja
+
+     12.00        1 .  234455678889
+      7.00        2 .  0122378
+      1.00        3 .  3
+
+ Anchura del tallo:      10
+ Cada hoja:          1 caso(s)</pre></div>
+        <p class="small muted">SPSS decide si parte cada decena en dos renglones y si marca algún valor como extremo; tu salida puede verse un poco distinta. Los datos son los mismos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LECCIÓN 5 ============ -->
+<section class="slide sep" data-sec="Lección 5" data-v="5" data-hook="sep"
+ data-notes="Inicio de la lección 5 (video 5). Lee la ruta.">
+  <div class="slide-inner">
+    <p class="eyebrow">Lección 5</p>
+    <h1>Diagramas de dispersión</h1>
+    <p class="lead">Primera exploración de una relación entre dos variables</p>
+    <ol class="agenda" data-v="5"></ol>
+    <div class="pills"><span>Stereo.sav</span><span>PelicanStores.sav</span><span>Movies.sav</span></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Cómo se lee una dispersión" data-v="5" data-step="1"
+ data-notes="Concepto. Estos cuatro patrones son ilustrativos, no datos reales.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto</p><h2>Cada punto es una observación: se mira dirección, forma y fuerza</h2></div>
+    <div class="grid g4" id="patrones"></div>
+    <p class="small muted mt">Eje X: la variable que suponemos explicativa · Eje Y: la que queremos explicar. Patrones ilustrativos.</p>
+  </div>
+</section>
+
+<section class="slide" data-sec="Dispersión (interactiva)" data-v="5" data-step="2"
+ data-notes="Concepto. Comerciales y ventas con línea: relación fuerte. Artículos y gasto: positiva pero dispersa. Edad y gasto: nube sin patrón. Estreno y taquilla: adelanto del ejercicio.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Concepto · interactiva</p><h2 id="ds-h">Más comerciales, más ventas</h2></div>
+    <div class="ctrl">
+      <span class="lbl">Datos</span><div class="seg" id="seg-sc"><button data-k="stereo" class="on">Comerciales y ventas</button><button data-k="art">Artículos y gasto</button><button data-k="edad">Edad y gasto</button><button data-k="mov">Estreno y taquilla</button></div>
+      <span class="lbl">Línea</span><div class="seg" id="seg-ln"><button data-k="1" class="on">Sí</button><button data-k="0">No</button></div>
+    </div>
+    <div class="grid g-6-4">
+      <div class="chart" id="ch-sc"></div>
+      <div><p class="formula" id="sc-eq"></p><p id="sc-r"></p><p class="small" id="sc-txt"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide alt" data-sec="Ejemplo en SPSS: dispersión con línea de ajuste" data-v="5" data-step="3"
+ data-notes="Ejemplo en vivo con Stereo. Los contrastes con PelicanStores (artículos y edad) ya se vieron en la lámina interactiva.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Ejemplo en SPSS · Stereo.sav · 10 semanas</p><h2>Dispersión de ventas contra comerciales</h2></div>
+    <div class="ej">
+      <div><p class="lbl2">Pasos</p><ol class="pasos">
+        <li><span class="m">Archivo › Abrir › Datos</span> › Stereo.sav</li>
+        <li><span class="m">Gráficos › Cuadros de diálogo antiguos › Dispersión/Puntos</span></li>
+        <li><b>Dispersión simple</b> › Definir</li>
+        <li><b>Ventas</b> al Eje Y (la que quiero explicar) y <b>Comerciales</b> al Eje X › Aceptar</li>
+        <li>Doble clic en el gráfico › <span class="m">Elementos › Línea de ajuste total</span> › Lineal › Aplicar › cierra el editor</li>
+      </ol></div>
+      <div><p class="lbl2">Lo que debe salir en el Visor</p><div class="vis"><div class="vchart" id="mini-v5"></div></div>
+        <p class="small"><b>Lectura:</b> relación positiva y fuerte (r = 0.93). Cada comercial adicional se asocia con unos 495 dólares más de venta semanal.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide oro" data-sec="Asociación no es causalidad" data-v="5" data-step="4" data-hook="oro"
+ data-notes="Interpretación y cierre de la lección 5.">
+  <div class="slide-inner">
+    <p class="eyebrow">Cómo se interpreta</p>
+    <h2>Asociación no es causalidad</h2>
+    <p class="lead">El diagrama sugiere una hipótesis. Probarla exige controlar otros factores: temporada, precios, competencia. Ese trabajo le toca a la regresión, no a este gráfico.</p>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="slide" data-sec="¿Qué herramienta para qué pregunta?" data-v="6"
+ data-notes="Cierre del módulo. Las bases y la guía de práctica están en la Guía del módulo, en la plataforma.">
+  <div class="slide-inner">
+    <div class="hd"><p class="eyebrow">Resumen</p><h2>¿Qué herramienta para qué pregunta?</h2></div>
+    <div class="tbl-wrap"><table class="t left lg"><tr><th style="width:38%">Pregunta</th><th style="width:27%">Herramienta</th><th>En SPSS</th></tr>
+      <tr><td>¿Cuántos hay en cada categoría?</td><td>Tabla de frecuencias</td><td class="mono">Analizar › Frecuencias</td></tr>
+      <tr><td>¿Cómo resumo muchos valores?</td><td>Tabla en clases</td><td class="mono">Transformar › Agrupación visual</td></tr>
+      <tr><td>¿Qué categoría pesa más?</td><td>Barras o pastel</td><td class="mono">Gráficos › Generador</td></tr>
+      <tr><td>¿Qué forma tiene la variable?</td><td>Histograma, polígono, tallo y hoja</td><td class="mono">Frecuencias › Gráficos · Explorar</td></tr>
+      <tr><td>¿Qué parte queda debajo de un valor?</td><td>Ojiva</td><td class="mono">Cuadros antiguos › Línea › % acum.</td></tr>
+      <tr><td>¿Una variable se mueve con otra?</td><td>Dispersión</td><td class="mono">Cuadros antiguos › Dispersión</td></tr></table></div>
+    <p class="small muted">Las bases en SPSS y la guía de práctica están en la <a href="../m2-teoria.html">Volver a las lecciones</a>.</p>
+  </div>
+</section>
+
+
+</main>
+<script>
+"use strict";
+/* ==================== DATOS (Anderson, Sweeney y Williams, cap. 2) ==================== */
+const SOFT=[["Coke Classic",19],["Diet Coke",8],["Dr. Pepper",5],["Pepsi",13],["Sprite",5]];
+const SOFT_RAW=["Coke Classic","Diet Coke","Pepsi","Diet Coke","Coke Classic","Coke Classic","Dr. Pepper","Diet Coke","Pepsi","Pepsi","Coke Classic","Dr. Pepper","Sprite","Coke Classic","Diet Coke","Coke Classic","Coke Classic","Sprite","Coke Classic","Diet Coke"];
+const PAGO=[["American Express",2],["Discover",4],["MasterCard",14],["Tarjeta propia",70],["Visa",10]];
+const TIPO=[["Regular",30],["Promocional",70]];
+const AUDIT=[12,15,20,22,14,14,15,27,21,18,19,18,22,33,16,18,17,23,28,13];
+const STEREO=[[2,50],[5,57],[1,41],[3,54],[4,54],[1,38],[5,63],[3,48],[4,59],[2,46]];
+const D={"pel":[[1,39.5,32],[1,102.4,36],[1,22.5,32],[5,100.4,28],[2,54.0,34],[1,44.5,44],[2,78.0,30],[1,22.5,40],[2,56.52,46],[1,44.5,36],[1,29.5,48],[1,31.6,40],[9,160.4,40],[2,64.5,46],[1,49.5,24],[2,71.4,36],[3,94.0,22],[3,54.5,40],[2,38.5,32],[6,44.8,56],[1,31.6,28],[4,70.82,38],[7,266.0,50],[2,74.0,42],[2,39.5,48],[1,30.02,60],[1,44.5,54],[5,192.8,42],[3,71.2,32],[1,18.0,70],[2,63.2,28],[1,75.0,52],[3,63.2,44],[1,40.0,34],[5,105.5,56],[1,29.5,36],[2,102.5,42],[6,117.5,50],[5,13.23,44],[2,52.5,58],[13,198.8,42],[4,19.5,46],[2,123.5,48],[1,62.4,54],[2,23.8,38],[2,39.6,60],[1,25.0,46],[3,63.64,30],[1,14.82,32],[9,145.2,46],[6,176.62,38],[5,118.8,68],[1,58.0,78],[2,74.0,20],[2,49.5,32],[3,141.6,38],[6,123.1,54],[2,80.4,48],[4,65.2,46],[4,113.0,50],[1,108.8,46],[3,59.91,30],[5,53.6,54],[1,31.6,42],[2,49.5,48],[1,39.6,62],[2,59.5,34],[5,146.8,28],[2,47.2,46],[8,95.05,54],[5,155.32,30],[4,58.0,32],[1,69.0,22],[2,46.5,32],[2,45.22,74],[4,84.74,62],[2,39.0,42],[4,111.14,28],[3,86.8,38],[2,89.0,54],[2,78.0,68],[6,53.2,30],[4,58.5,36],[3,46.0,44],[2,37.5,44],[1,20.8,62],[6,144.0,48],[4,107.0,36],[1,31.6,20],[6,57.6,42],[4,95.2,54],[1,22.42,54],[5,159.75,72],[17,229.5,30],[3,66.0,46],[1,39.5,44],[9,253.0,30],[10,287.59,52],[2,47.6,30],[1,28.44,44]],"mov":[[29.168,67.253],[0.149,6.645],[48.745,205.279],[10.901,24.474],[0.059,0.229],[12.4,42.009],[102.686,287.181],[23.105,82.888],[24.114,55.851],[50.343,186.219],[23.45,55.809],[0.032,0.127],[24.63,89.685],[0.136,0.363],[0.024,0.049],[0.269,17.081],[0.428,4.613],[77.062,234.207],[0.021,0.416],[5.623,11.008],[0.037,0.037],[23.507,64.255],[12.077,32.049],[0.165,0.165],[0.065,0.849],[0.085,1.228],[0.025,0.025],[19.636,47.311],[0.055,4.363],[0.231,11.239],[0.401,0.865],[2.834,5.133],[12.021,30.968],[15.341,80.83],[16.168,57.859],[0.06,0.111],[0.015,0.105],[0.235,0.78],[0.148,0.148],[0.78,13.649],[0.048,1.256],[0.091,0.129],[0.07,1.657],[0.056,0.056],[0.078,0.078],[0.11,0.29],[29.12,73.995],[0.121,1.142],[7.577,21.836],[0.439,0.74],[10.222,20.434],[1.335,4.512],[0.031,3.687],[0.009,0.164],[0.144,0.337],[0.037,2.809],[1.911,4.45],[18.068,68.643],[18.862,49.187],[0.045,7.899],[30.054,75.072],[0.037,0.201],[0.047,0.047],[7.058,18.472],[0.121,0.213],[0.03,0.065],[0.503,7.311],[0.683,56.071],[0.043,0.139],[0.386,6.571],[0.025,0.122],[0.757,1.678],[108.436,380.176],[1.19,1.19],[0.036,0.085],[18.32,61.578],[0.212,18.742],[16.058,47.806],[6.147,14.888],[12.521,59.704],[0.026,0.026],[1.898,3.645],[17.461,53.302],[33.901,209.218],[16.026,56.069],[0.036,0.036],[0.032,0.492],[0.325,20.129],[0.516,31.456],[0.057,0.51],[7.067,16.901],[3.657,15.331],[0.194,7.525],[22.347,113.633],[0.14,0.818],[4.908,16.044],[0.09,0.966],[0.155,19.282],[0.24,1.246],[0.087,0.424]]};
+const EDAD=D.pel.map(r=>r[2]);
+
+/* ==================== UTILIDADES ==================== */
+const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const NS="http://www.w3.org/2000/svg";
+function E(tag,a,txt){const n=document.createElementNS(NS,tag);for(const k in a)n.setAttribute(k,a[k]);if(txt!=null)n.textContent=txt;return n}
+function fit(host,ratio,label){const W=Math.max(300,Math.round(host.clientWidth||680)),H=Math.round(W*(ratio||0.58));host.innerHTML="";
+  const s=E("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":label||""});host.appendChild(s);return {s,W,H}}
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const f2=v=>(Math.round(v*100)/100).toFixed(2);
+function ticks(max,n){n=n||5;const raw=max/n,m=Math.pow(10,Math.floor(Math.log10(raw))),q=raw/m;const st=(q<=1?1:q<=2?2:q<=2.5?2.5:q<=5?5:10)*m;const o=[];for(let v=0;v<max+st*.999;v+=st)o.push(Math.round(v*1e6)/1e6);return o}
+function seg(id,fn){const g=$(id);g.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$$("button",g).forEach(x=>x.classList.toggle("on",x===b));fn(b.dataset.k)})}
+function wrapText(t,x,y,txt,maxCh,lh){const words=txt.split(" ");let line="",lines=[];words.forEach(w=>{if((line+" "+w).trim().length>maxCh&&line){lines.push(line);line=w}else line=(line+" "+w).trim()});lines.push(line);
+  lines.forEach((l,i)=>t.appendChild(E("tspan",{x:x,dy:i?lh:0},l)));t.setAttribute("y",y);return t}
+const M={L:50,R:14,T:36,B:50};
+function axes(s,W,H,o){const L=o.L||M.L,R=o.R||M.R,T=o.T||M.T,B=o.B||M.B;
+  const X=v=>L+(v-o.x0)/(o.x1-o.x0)*(W-L-R), Y=v=>H-B-(v-(o.y0||0))/(o.y1-(o.y0||0))*(H-T-B);
+  (o.yt||[]).forEach(v=>{s.appendChild(E("line",{x1:L,x2:W-R,y1:Y(v),y2:Y(v),class:"grid-l"}));s.appendChild(E("text",{x:L-8,y:Y(v)+4,"text-anchor":"end",class:"tk"},o.yfmt?o.yfmt(v):v))});
+  s.appendChild(E("line",{x1:L,x2:W-R,y1:H-B,y2:H-B,class:"base"}));
+  if(o.xlab)s.appendChild(E("text",{x:L+(W-L-R)/2,y:H-6,"text-anchor":"middle",class:"ax"},o.xlab));
+  if(o.ylab)s.appendChild(E("text",{x:L,y:14,class:"ax"},o.ylab));
+  return {X,Y,L,R,T,B}}
+
+/* ==================== ESQUEMA (HTML) ==================== */
+function drawMapa(){
+  const rows=[["Cualitativa","nominal u ordinal","Tabla de frecuencias","contar","L1·L2","Barras · pastel","L3"],
+    ["Cuantitativa","una variable","Tabla en clases","agrupar primero","L2","Histograma · polígono · ojiva · tallo y hoja","L4"],
+    ["Dos cuantitativas","pares (x, y)","Una observación por punto","sin agrupar","","Diagrama de dispersión","L5"]];
+  let h=`<div class="esq"><div class="esq-raiz"><b>Tu variable</b></div><div class="esq-rows">`;
+  rows.forEach(r=>{h+=`<div class="esq-row"><div class="esq-b tipo"><b>${r[0]}</b><small>${r[1]}</small></div><i></i><div class="esq-b"><b>${r[2]}</b><small>${r[3]}</small>${r[4]?`<em>${r[4]}</em>`:""}</div><i></i><div class="esq-b"><b>${r[5]}</b><em>${r[6]}</em></div></div>`});
+  h+=`</div></div>`;$("#ch-mapa").innerHTML=h;
+}
+
+/* ==================== L1: cuatro formas ==================== */
+function drawFormas(k){
+  const n=50;let acc=0;const rows=SOFT.map(([c,f])=>{acc+=f;return [c,f,f/n,f/n*100,acc]});
+  const cls=c=>c===k?"on":"off";
+  let h=`<tr><th>Marca</th><th class="${cls('abs')}">Absoluta</th><th class="${cls('rel')}">Relativa</th><th class="${cls('pct')}">Porcentual</th><th class="${cls('acu')}">Acumulada</th></tr>`;
+  rows.forEach(r=>h+=`<tr><td>${r[0]}</td><td class="${cls('abs')}">${r[1]}</td><td class="${cls('rel')}">${f2(r[2])}</td><td class="${cls('pct')}">${r[3].toFixed(0)} %</td><td class="${cls('acu')}">${r[4]}</td></tr>`);
+  h+=`<tr class="tot"><td>Total</td><td class="${cls('abs')}">50</td><td class="${cls('rel')}">1.00</td><td class="${cls('pct')}">100 %</td><td class="${cls('acu')}"></td></tr>`;
+  $("#tb-formas").innerHTML=h;
+  const T={abs:["Absoluta","f","Coke Classic aparece 19 veces. Las absolutas suman n = 50."],
+    rel:["Relativa","f ÷ n","19 ÷ 50 = 0.38. Las relativas suman 1 y sirven para comparar muestras de distinto tamaño."],
+    pct:["Porcentual","(f ÷ n) × 100","0.38 × 100 = 38 %. Es la que más se reporta: los porcentajes suman 100."],
+    acu:["Acumulada","f₁ + f₂ + … + fₖ","19 + 8 = 27 compras hasta Diet Coke. Solo tiene sentido si las categorías tienen orden."]}[k];
+  $("#fm-t").textContent=T[0];$("#fm-f").textContent=T[1];$("#fm-x").textContent=T[2];$("#fm-w").style.display=k==="acu"?"block":"none";
+}
+/* ==================== L1: acumulada ==================== */
+function drawAcu(x){
+  const s=[...AUDIT].sort((a,b)=>a-b);const c=s.filter(v=>v<=x).length;
+  $("#chips-audit").innerHTML=s.map(v=>`<span class="${v<=x?'in':''}">${v}</span>`).join("");
+  $("#rg-acu-v").textContent=x;$("#acu-pct").textContent=Math.round(c/20*100)+" %";
+  $("#acu-txt").innerHTML=`de las auditorías duró <b>${x} días o menos</b> (${c} de 20).`;
+}
+/* ==================== L2: ancho de clase ==================== */
+function classes(w){const out=[];for(let lo=10;lo<=33;lo+=w){const hi=lo+w-1;out.push({lo,hi,f:AUDIT.filter(v=>v>=lo&&v<=hi).length})}return out}
+function drawAncho(){
+  const w=+$("#rg-w").value;$("#rg-w-v").textContent=w;const C=classes(w);
+  const {s,W,H}=fit($("#ch-ancho"),.58,"Histograma de Audit con ancho de clase "+w);
+  const fmax=Math.max(...C.map(c=>c.f));const yt=ticks(Math.max(fmax,4),4);
+  const x0=9.5,x1=C[C.length-1].hi+.5;
+  const {X,Y,B}=axes(s,W,H,{x0,x1,y1:yt[yt.length-1],yt,xlab:"Duración (días)",ylab:"Auditorías"});
+  C.forEach(c=>{const a=X(c.lo-.5),b=X(c.hi+.5);const r=E("rect",{x:a,y:Y(c.f),width:b-a,height:Y(0)-Y(c.f),style:"fill:var(--mark);stroke:var(--surface-0);stroke-width:1.5"});r.appendChild(E("title",{},`${c.lo}–${c.hi} días: ${c.f}`));s.appendChild(r);
+    if(c.f)s.appendChild(E("text",{x:(a+b)/2,y:Y(c.f)-6,"text-anchor":"middle",class:"dl"},c.f));
+    if(C.length<=7)s.appendChild(E("text",{x:(a+b)/2,y:H-B+18,"text-anchor":"middle",class:"tk"},`${c.lo}–${c.hi}`));
+    else s.appendChild(E("text",{x:a,y:H-B+18,"text-anchor":"middle",class:"tk"},c.lo))});
+  const m=C.reduce((a,b)=>b.f>a.f?b:a);
+  $("#an-k").textContent=`${C.length} clases de ${w} días`;
+  $("#an-m").innerHTML=`Clase modal: <b>${m.lo}–${m.hi} días</b>, con ${m.f} de 20 auditorías.`;
+  const msg=w<=3?"Demasiadas clases: varias barras tienen 0 o 1 dato y el patrón se vuelve ruido.":w<=6?"Se ve la forma: concentración entre 15 y 24 días y una cola hacia la derecha.":w===7?"Todavía se intuye la forma, pero ya pierde detalle.":"Muy pocas clases: casi todo cae en una o dos barras y la forma desaparece.";
+  const el=$("#an-msg");el.textContent=msg;el.classList.toggle("warn",w<=3||w>=8);
+}
+/* ==================== L3: barras y pastel ==================== */
+const CATS={soft:{d:SOFT,n:50,h:"Coca-Cola concentra 38 % de las compras"},pago:{d:PAGO,n:100,h:"Siete de cada diez compras se pagaron con la tarjeta de la tienda"},tipo:{d:TIPO,n:100,h:"70 % de las compras vino de clientes promocionales"}};
+const PAL=["var(--c1)","var(--c2)","var(--c3)","var(--c4)","var(--c5)"];
+let catState={ds:"soft",tp:"bar",ord:"desc"};
+function drawCat(){
+  const {ds,tp,ord}=catState,C=CATS[ds];let d=C.d.map((r,i)=>({c:r[0],f:r[1],i}));
+  if(ord==="desc")d=[...d].sort((a,b)=>b.f-a.f);
+  $("#gr-h").textContent=C.h;
+  const host=$("#ch-cat");
+  if(tp==="bar"){
+    const {s,W,H}=fit(host,.58,"Gráfico de barras");
+    const mx=Math.max(...d.map(x=>x.f/C.n*100));const yt=ticks(mx,4);
+    const {X,Y,B}=axes(s,W,H,{x0:0,x1:d.length,y1:yt[yt.length-1],yt,yfmt:v=>v+" %",ylab:"Porcentaje"});
+    const bw=(W-M.L-M.R)/d.length;
+    d.forEach((x,i)=>{const p=x.f/C.n*100,a=X(i)+bw*.18,w=bw*.64;
+      const r=E("rect",{x:a,y:Y(p),width:w,height:Y(0)-Y(p),rx:3,style:"fill:var(--mark)"});r.appendChild(E("title",{},`${x.c}: ${x.f} (${p.toFixed(0)} %)`));s.appendChild(r);
+      s.appendChild(E("text",{x:a+w/2,y:Y(p)-6,"text-anchor":"middle",class:"dl"},p.toFixed(0)+" %"));
+      const t=E("text",{"text-anchor":"middle",class:"tk"});wrapText(t,a+w/2,H-B+18,x.c,d.length>3?11:16,14);s.appendChild(t)});
+  }else{
+    const {s,W}=fit(host,.62,"Gráfico de pastel");const cx=W/2,cy=W*.31,r=Math.min(W*.28,230);let a0=-Math.PI/2;
+    d.forEach((x,i)=>{x.i=i;const a1=a0+2*Math.PI*x.f/C.n,lg=a1-a0>Math.PI?1:0;
+      const p=`M${cx} ${cy}L${cx+r*Math.cos(a0)} ${cy+r*Math.sin(a0)}A${r} ${r} 0 ${lg} 1 ${cx+r*Math.cos(a1)} ${cy+r*Math.sin(a1)}Z`;
+      const pa=E("path",{d:p,style:`fill:${PAL[x.i]};stroke:var(--surface-0);stroke-width:2.5`});pa.appendChild(E("title",{},`${x.c}: ${(x.f/C.n*100).toFixed(0)} %`));s.appendChild(pa);
+      const pc=x.f/C.n*100;if(pc>=8){const am=(a0+a1)/2;s.appendChild(E("text",{x:cx+r*.62*Math.cos(am),y:cy+r*.62*Math.sin(am)+5,"text-anchor":"middle",style:`font-size:15px;font-weight:700;fill:${x.i===0?"var(--pl1)":x.i===4?"#F6F5F1":"#1B2631"}`},pc.toFixed(0)+" %"))}
+      a0=a1});
+  }
+  $("#lg-cat").innerHTML=d.map(x=>`<div><i style="background:${tp==="pie"?PAL[x.i]:"var(--mark)"}"></i>${x.c}<span>${(x.f/C.n*100).toFixed(0)} %</span></div>`).join("");
+  let m;
+  if(tp==="pie")m=d.length>=5?"Con cinco categorías, las rebanadas pequeñas casi no se distinguen. Para comparar, mejor barras.":"Dos partes de un todo: aquí el pastel funciona bien.";
+  else m=ord==="desc"?"De mayor a menor, el ranking se lee de inmediato.":"En el orden de los códigos el ranking no salta a la vista. Las barras van separadas: son categorías.";
+  $("#cat-msg").textContent=m;
+}
+/* ==================== L4: histograma y polígono ==================== */
+let hpMode="h";
+function drawHP(){
+  const mode=hpMode,C=classes(5);const {s,W,H}=fit($("#ch-hp"),.58,"Histograma y polígono de la duración de auditorías");
+  const {X,Y,B}=axes(s,W,H,{x0:4.5,x1:39.5,y1:9,yt:[0,2,4,6,8],xlab:mode==="h"?"Duración (días): fronteras de clase":"Duración (días): marcas de clase",ylab:"Auditorías"});
+  if(mode!=="p")C.forEach(c=>{const a=X(c.lo-.5),b=X(c.hi+.5);s.appendChild(E("rect",{x:a,y:Y(c.f),width:b-a,height:Y(0)-Y(c.f),style:`fill:var(--mark);opacity:${mode==="a"?.18:1};stroke:var(--surface-0);stroke-width:1.5`}));
+    if(mode==="h")s.appendChild(E("text",{x:(a+b)/2,y:Y(c.f)-6,"text-anchor":"middle",class:"dl"},c.f))});
+  if(mode==="h")[9.5,14.5,19.5,24.5,29.5,34.5].forEach(v=>s.appendChild(E("text",{x:X(v),y:H-B+18,"text-anchor":"middle",class:"tk"},v)));
+  else{const P=[[7,0],...C.map(c=>[(c.lo+c.hi)/2,c.f]),[37,0]];
+    s.appendChild(E("polyline",{points:P.map(p=>X(p[0])+","+Y(p[1])).join(" "),style:"fill:none;stroke:var(--brand);stroke-width:3;stroke-linejoin:round"}));
+    P.forEach(p=>{s.appendChild(E("circle",{cx:X(p[0]),cy:Y(p[1]),r:6,style:"fill:var(--gold);stroke:var(--brand);stroke-width:2"}));s.appendChild(E("text",{x:X(p[0]),y:H-B+18,"text-anchor":"middle",class:"tk"},p[0]));
+      if(p[1]>0)s.appendChild(E("text",{x:X(p[0]),y:Y(p[1])-12,"text-anchor":"middle",class:"dl"},p[1]))})}
+  const T={h:["Las barras <b>se tocan</b>: las clases son contiguas.","<b>Sesgo positivo</b>: muchos casos bajos y pocos altos. Es la forma típica del ingreso, del salario o del tamaño de empresa."],
+    a:["El polígono une las <b>marcas de clase</b>: (10 + 14) ÷ 2 = 12.","Las clases vacías en 7 y 37 lo cierran sobre el eje."],
+    p:["Sin barras queda la forma limpia.","Su ventaja: permite encimar dos distribuciones en un mismo gráfico, por ejemplo las auditorías de dos despachos."]}[mode];
+  $("#hp-1").innerHTML=T[0];$("#hp-2").innerHTML=T[1];
+}
+/* ==================== L4: ojiva ==================== */
+const OJ=[[9.5,0],[14.5,20],[19.5,60],[24.5,85],[29.5,95],[34.5,100]];
+function ojAt(x){for(let i=1;i<OJ.length;i++){if(x<=OJ[i][0]){const [a,pa]=OJ[i-1],[b,pb]=OJ[i];return pa+(pb-pa)*(x-a)/(b-a)}}return 100}
+function drawOj(){
+  const x=+$("#rg-oj").value;const {s,W,H}=fit($("#ch-oj"),.58,"Ojiva del porcentaje acumulado");
+  const {X,Y,B}=axes(s,W,H,{L:60,x0:7,x1:37,y1:100,yt:[0,20,40,60,80,100],yfmt:v=>v+" %",xlab:"Frontera superior de clase (días)",ylab:"% acumulado"});
+  OJ.forEach(p=>s.appendChild(E("text",{x:X(p[0]),y:H-B+18,"text-anchor":"middle",class:"tk"},p[0])));
+  const y=ojAt(x);
+  s.appendChild(E("path",{d:`M${X(7)} ${Y(y)}H${X(x)}V${Y(0)}`,style:"fill:none;stroke:var(--gold-ink);stroke-width:2;stroke-dasharray:6 5"}));
+  s.appendChild(E("polyline",{points:OJ.map(p=>X(p[0])+","+Y(p[1])).join(" "),style:"fill:none;stroke:var(--brand);stroke-width:3;stroke-linejoin:round"}));
+  OJ.forEach(p=>s.appendChild(E("circle",{cx:X(p[0]),cy:Y(p[1]),r:5.5,style:"fill:var(--gold);stroke:var(--brand);stroke-width:2"})));
+  s.appendChild(E("circle",{cx:X(x),cy:Y(y),r:8,style:"fill:var(--gold-ink);stroke:var(--surface-0);stroke-width:2.5"}));
+  const exact=OJ.some(p=>p[0]===x);
+  $("#rg-oj-v").textContent=x.toFixed(1);$("#oj-pct").textContent=(exact?"":"≈ ")+Math.round(y)+" %";
+  $("#oj-txt").innerHTML=exact?`de las auditorías duró menos de <b>${x.toFixed(1)} días</b>.`:`de las auditorías duró menos de <b>${x.toFixed(1)} días</b>. Entre fronteras, la ojiva interpola: es una aproximación.`;
+}
+/* ==================== L4: tallo y hoja ==================== */
+let stState={d:"audit",sp:"1"};
+function drawStem(){
+  const v=[...(stState.d==="audit"?AUDIT:EDAD)].sort((a,b)=>a-b);const sp=stState.sp==="2";
+  const lo=Math.floor(v[0]/10),hi=Math.floor(v[v.length-1]/10);let rows=[];
+  for(let t=lo;t<=hi;t++){const L=v.filter(x=>Math.floor(x/10)===t).map(x=>x%10);
+    if(sp){rows.push([t,L.filter(x=>x<5)]);rows.push([t,L.filter(x=>x>=5)])}else rows.push([t,L])}
+  if(sp){while(rows.length&&!rows[0][1].length)rows.shift();while(rows.length&&!rows[rows.length-1][1].length)rows.pop()}
+  let h=`<span class="f">Frec.  Tallo │ Hojas</span>\n`;
+  rows.forEach(([t,L])=>{h+=`<span class="f">${String(L.length).padStart(4)}</span>    <span class="s">${String(t).padStart(2)}</span> │ ${L.join(stState.d==="audit"?" ":"")}\n`});
+  h+=`<span class="f">Ancho del tallo: 10 · cada hoja: 1 caso</span>`;
+  $("#stem").innerHTML=h;
+  if(stState.d==="audit"){$("#st-1").innerHTML="Tallo = decenas, hoja = unidades. «2 │ 7» son 27 días.";
+    $("#st-2").innerHTML=sp?"Con pocos datos, dividir los tallos no ayuda: el patrón ya se veía con un renglón por decena.":"Volteado de lado es un histograma: el pico está en el tallo 1 y la cola llega a 33."}
+  else{$("#st-1").innerHTML="Edades de 20 a 78 años; 63 de los 100 clientes tienen entre 30 y 49.";
+    $("#st-2").innerHTML=(sp?"Así lo presenta SPSS con muchos datos: cada decena en dos renglones, hojas 0–4 y 5–9. ":"")+"<b>Todas las hojas son pares</b>: el tallo y hoja deja ver cómo se registraron los datos. El histograma no."}
+}
+/* ==================== L5: patrones ==================== */
+function rnd(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return (s-1)/2147483646}}
+function drawPatrones(){
+  const P=[["Positiva","Sube una, sube la otra",x=>.1+.8*x],["Negativa","Sube una, baja la otra",x=>.9-.8*x],["Sin relación","Una nube sin patrón",null],["Curva","Una recta la describe mal",x=>.15+3*(x-.5)**2]];
+  const host=$("#patrones");host.innerHTML="";
+  P.forEach((p,k)=>{const R=rnd(97+k*31);const c=document.createElement("div");c.className="card";
+    const s=E("svg",{viewBox:"0 0 360 280",role:"img","aria-label":"Patrón: "+p[0]});s.style.width="100%";s.style.height="auto";s.style.display="block";
+    s.appendChild(E("line",{x1:20,y1:262,x2:345,y2:262,style:"stroke:var(--ink-3);stroke-width:2"}));s.appendChild(E("line",{x1:20,y1:15,x2:20,y2:262,style:"stroke:var(--ink-3);stroke-width:2"}));
+    for(let i=0;i<24;i++){const x=.05+.9*R();let y=p[2]?p[2](x)+(R()-.5)*.16:.1+.8*R();y=Math.min(.97,Math.max(.03,y));s.appendChild(E("circle",{cx:20+x*320,cy:262-y*240,r:9,style:"fill:var(--mark);opacity:.85"}))}
+    c.appendChild(s);const h=document.createElement("h3");h.textContent=p[0];h.style.margin="10px 0 4px";h.style.textAlign="center";c.appendChild(h);const q=document.createElement("p");q.className="small mb0";q.style.textAlign="center";q.textContent=p[1];c.appendChild(q);host.appendChild(c)});
+}
+/* ==================== L5: dispersión ==================== */
+const SC={
+  stereo:{pts:STEREO,xl:"Comerciales de TV por semana",yl:"Ventas (cientos de USD)",x:[0,6],y:[30,70],yn:"Ventas",xn:"Comerciales",h:"Más comerciales, más ventas: relación fuerte",t:"Cada comercial adicional se asocia con unos 495 dólares más de venta semanal. Son 10 semanas y no se controla temporada ni precio.",op:.9,r:8},
+  art:{pts:D.pel.map(r=>[r[0],r[1]]),xl:"Artículos comprados",yl:"Ventas netas (USD)",x:[0,18],y:[0,300],yn:"Ventas",xn:"Artículos",h:"Más artículos, más gasto, pero con mucha dispersión",t:"Con el mismo número de artículos hay gastos muy distintos, porque no todos los artículos cuestan lo mismo.",op:.55,r:5.5},
+  edad:{pts:D.pel.map(r=>[r[2],r[1]]),xl:"Edad (años)",yl:"Ventas netas (USD)",x:[15,80],y:[0,300],yn:"Ventas",xn:"Edad",h:"La edad no se asocia con el gasto",t:"Una nube sin patrón y una línea casi plana. Que no haya relación también es un hallazgo: no conviene segmentar la promoción por edad.",op:.6,r:5.5},
+  mov:{pts:D.mov,xl:"Ingreso del fin de semana de estreno (millones USD)",yl:"Ingreso total (millones USD)",x:[0,110],y:[0,400],yn:"Total",xn:"Estreno",h:"Un buen estreno anticipa una buena taquilla",t:"Ojo: el ingreso total incluye el del estreno, así que parte de la relación es aritmética. Es el adelanto del ejercicio integral.",op:.6,r:5.5}};
+let scState={d:"stereo",ln:"1"};
+function reg(P){const n=P.length,mx=sum(P.map(p=>p[0]))/n,my=sum(P.map(p=>p[1]))/n;let sxy=0,sxx=0,syy=0;P.forEach(([x,y])=>{sxy+=(x-mx)*(y-my);sxx+=(x-mx)**2;syy+=(y-my)**2});const b=sxy/sxx;return {b,a:my-b*mx,r:sxy/Math.sqrt(sxx*syy)}}
+function drawSc(){
+  const c=SC[scState.d];const {s,W,H}=fit($("#ch-sc"),.6,"Diagrama de dispersión: "+c.yl+" contra "+c.xl);
+  const yt=ticks(c.y[1]-c.y[0],4).map(v=>v+c.y[0]).filter(v=>v<=c.y[1]);
+  const {X,Y,B}=axes(s,W,H,{x0:c.x[0],x1:c.x[1],y0:c.y[0],y1:c.y[1],yt,xlab:c.xl,ylab:c.yl});
+  ticks(c.x[1]-c.x[0],6).map(v=>v+c.x[0]).filter(v=>v<=c.x[1]).forEach(v=>s.appendChild(E("text",{x:X(v),y:H-B+18,"text-anchor":"middle",class:"tk"},v)));
+  const R=reg(c.pts);
+  if(scState.ln==="1"){const xa=c.x[0],xb=c.x[1];let ya=R.a+R.b*xa,yb=R.a+R.b*xb;
+    const clip=(x,y)=>{if(y>c.y[1]){x=(c.y[1]-R.a)/R.b;y=c.y[1]}if(y<c.y[0]){x=(c.y[0]-R.a)/R.b;y=c.y[0]}return [x,y]};const p1=clip(xa,ya),p2=clip(xb,yb);
+    s.appendChild(E("line",{x1:X(p1[0]),y1:Y(p1[1]),x2:X(p2[0]),y2:Y(p2[1]),style:"stroke:var(--gold-ink);stroke-width:2.5;stroke-dasharray:9 6"}))}
+  c.pts.forEach(([x,y])=>{const k=E("circle",{cx:X(x),cy:Y(y),r:c.r,style:`fill:var(--mark);opacity:${c.op};stroke:var(--surface-0);stroke-width:1`});k.appendChild(E("title",{},`${c.xn}: ${x} · ${c.yn}: ${y}`));s.appendChild(k)});
+  $("#ds-h").textContent=c.h;
+  $("#sc-eq").textContent=`${c.yn} = ${f2(R.a)} ${R.b<0?"−":"+"} ${f2(Math.abs(R.b))} × ${c.xn}`;
+  $("#sc-eq").style.visibility=scState.ln==="1"?"visible":"hidden";
+  $("#sc-r").innerHTML=`<b>r = ${f2(R.r).replace("-","−")}</b> · R² = ${(R.r*R.r).toFixed(3)} · n = ${c.pts.length}`;
+  $("#sc-txt").textContent=c.t;
+}
+
+/* ==================== RÉPLICAS DEL VISOR DE SPSS ==================== */
+const VC={bar:"#24398A",ln:"#24398A",tx:"#222",gr:"#D5D9E0"};
+function vframe(id,ratio){const host=$(id);const W=Math.max(280,Math.round(host.clientWidth||520)),H=Math.round(W*ratio);host.innerHTML="";
+  const s=E("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Réplica de la salida de SPSS"});s.style.fontFamily="Arial,Helvetica,sans-serif";host.appendChild(s);return {s,W,H}}
+function vaxes(s,W,H,L,B,T,R,y1,yt,yfmt){const Y=v=>H-B-v/y1*(H-T-B);
+  yt.forEach(v=>{s.appendChild(E("line",{x1:L,x2:W-R,y1:Y(v),y2:Y(v),stroke:VC.gr}));s.appendChild(E("text",{x:L-7,y:Y(v)+4,"text-anchor":"end","font-size":12,fill:VC.tx},yfmt?yfmt(v):v))});
+  s.appendChild(E("line",{x1:L,x2:W-R,y1:H-B,y2:H-B,stroke:"#555","stroke-width":1.2}));s.appendChild(E("line",{x1:L,x2:L,y1:T,y2:H-B,stroke:"#555","stroke-width":1.2}));return Y}
+function vlab(s,W,H,L,B,T,R,xl,yl){if(xl)s.appendChild(E("text",{x:(L+W-R)/2,y:H-5,"text-anchor":"middle","font-size":12.5,fill:VC.tx},xl));
+  if(yl)s.appendChild(E("text",{x:13,y:(H-B+T)/2,"font-size":12.5,fill:VC.tx,"text-anchor":"middle",transform:`rotate(-90 13 ${(H-B+T)/2})`},yl))}
+function vBars(id,data,n,ylab){const {s,W,H}=vframe(id,.56);const L=50,B=46,T=14,R=10;const mx=Math.max(...data.map(d=>d[1]/n*100));const yt=ticks(mx,4);const Y=vaxes(s,W,H,L,B,T,R,yt[yt.length-1],yt);
+  const bw=(W-L-R)/data.length;data.forEach((d,i)=>{const x=L+i*bw+bw*.2;s.appendChild(E("rect",{x,y:Y(d[1]/n*100),width:bw*.6,height:Y(0)-Y(d[1]/n*100),fill:VC.bar}));
+    const t=E("text",{"text-anchor":"middle","font-size":11.5,fill:VC.tx});wrapText(t,x+bw*.3,H-B+15,d[0],10,13);s.appendChild(t)});vlab(s,W,H,L,B,T,R,"Marca",ylab)}
+function vPie(id){const {s,W,H}=vframe(id,.58);const d=PAGO,n=100,cols=["#3E58AC","#2E9E8F","#D3CE97","#7A5C9E","#E6B33E"];let a0=-Math.PI/2;const r=Math.min(H*.42,W*.26),cx=r+14,cy=H/2;
+  d.forEach((x,i)=>{const a1=a0+2*Math.PI*x[1]/n,lg=a1-a0>Math.PI?1:0;s.appendChild(E("path",{d:`M${cx} ${cy}L${cx+r*Math.cos(a0)} ${cy+r*Math.sin(a0)}A${r} ${r} 0 ${lg} 1 ${cx+r*Math.cos(a1)} ${cy+r*Math.sin(a1)}Z`,fill:cols[i],stroke:"#fff","stroke-width":1.2}));
+    const am=(a0+a1)/2;if(x[1]>=8)s.appendChild(E("text",{x:cx+r*.62*Math.cos(am),y:cy+r*.62*Math.sin(am)+4,"text-anchor":"middle","font-size":12,fill:i===2?"#222":"#fff"},x[1].toFixed(2)+" %"));a0=a1});
+  const lx=cx+r+28,ly=cy-62;s.appendChild(E("text",{x:lx,y:ly-12,"font-size":12.5,fill:VC.tx,"font-weight":700},"FormaPago"));
+  d.forEach((x,i)=>{s.appendChild(E("rect",{x:lx,y:ly+i*24,width:14,height:14,fill:cols[i]}));s.appendChild(E("text",{x:lx+22,y:ly+12+i*24,"font-size":12.5,fill:VC.tx},x[0]))})}
+function vHist(id){const {s,W,H}=vframe(id,.56);const L=46,B=46,T=14,R=120;const C=classes(5);const Y=vaxes(s,W,H,L,B,T,R,9,[0,2,4,6,8]);const X=v=>L+(v-7)/(37-7)*(W-L-R);
+  C.forEach(c=>s.appendChild(E("rect",{x:X(c.lo-.5),y:Y(c.f),width:X(c.hi+.5)-X(c.lo-.5),height:Y(0)-Y(c.f),fill:VC.bar,stroke:"#fff","stroke-width":1})));
+  [9.5,14.5,19.5,24.5,29.5,34.5].forEach(v=>s.appendChild(E("text",{x:X(v),y:H-B+15,"text-anchor":"middle","font-size":11.5,fill:VC.tx},v)));
+  vlab(s,W,H,L,B,T,R,"Duracion","Frecuencia");
+  ["Media = 19.25","Desv. típ. = 5.437","N = 20"].forEach((t,i)=>s.appendChild(E("text",{x:W-R+12,y:34+i*18,"font-size":12,fill:VC.tx},t)))}
+function vLine(id,pts,ymax,yt,xlab,ylab){const {s,W,H}=vframe(id,.56);const Lm=54,Bm=46,T=14,R=12;const Y=vaxes(s,W,H,Lm,Bm,T,R,ymax,yt);const step=(W-Lm-R)/pts.length;const X=i=>Lm+step*(i+.5);
+  s.appendChild(E("polyline",{points:pts.map((p,i)=>X(i)+","+Y(p[1])).join(" "),fill:"none",stroke:VC.ln,"stroke-width":2}));
+  pts.forEach((p,i)=>{s.appendChild(E("circle",{cx:X(i),cy:Y(p[1]),r:4,fill:VC.ln}));s.appendChild(E("text",{x:X(i),y:H-Bm+15,"text-anchor":"middle","font-size":11.5,fill:VC.tx},p[0]));s.appendChild(E("text",{x:X(i)+8,y:Y(p[1])-7,"font-size":11,fill:VC.tx},p[1]))});
+  vlab(s,W,H,Lm,Bm,T,R,xlab,ylab)}
+function vScatter(id){const {s,W,H}=vframe(id,.56);const L=50,B=46,T=14,R=12;const Yr=vaxes(s,W,H,L,B,T,R,40,[0,10,20,30,40],v=>v+30);const Y=v=>Yr(v-30);const X=v=>L+v/6*(W-L-R);
+  [0,1,2,3,4,5,6].forEach(v=>s.appendChild(E("text",{x:X(v),y:H-B+15,"text-anchor":"middle","font-size":11.5,fill:VC.tx},v)));
+  s.appendChild(E("line",{x1:X(.5),y1:Y(36.15+4.95*.5),x2:X(5.8),y2:Y(36.15+4.95*5.8),stroke:"#C0392B","stroke-width":1.8}));
+  STEREO.forEach(p=>s.appendChild(E("circle",{cx:X(p[0]),cy:Y(p[1]),r:5,fill:"none",stroke:VC.ln,"stroke-width":1.8})));
+  s.appendChild(E("text",{x:X(4.4),y:Y(47),"font-size":12,fill:VC.tx},"R² lineal = 0.866"));vlab(s,W,H,L,B,T,R,"Comerciales","Ventas")}
+
+/* ==================== RUTA DE CADA LECCIÓN ==================== */
+const AG={1:["Qué es una distribución de frecuencia","Las cuatro formas de expresarla","Ejemplo 1 en SPSS: frecuencias de la marca","Con datos ordenados: la acumulada","Ejemplo 2 en SPSS: la acumulada de Audit","Cómo se usa en investigación"],
+  2:["Cualitativa o cuantitativa","Ejemplo 1 en SPSS: una ordinal","Tres decisiones para agrupar","El ancho de clase","Ejemplo 2 en SPSS: agrupar en clases","Interpretación de la tabla"],
+  3:["Barras o pastel","¿Cuál usar?","Ejemplo 1 en SPSS: barras","Ejemplo 2 en SPSS: gráfico de pastel"],
+  4:["Cuatro gráficos, cuatro preguntas","Histograma y polígono","Ejemplo 1 en SPSS: histograma","La ojiva","Ejemplo 2 en SPSS: ojiva","Tallo y hoja","Ejemplo 3 en SPSS: tallo y hoja"],
+  5:["Cómo se lee una dispersión","Dispersión con datos reales","Ejemplo en SPSS: dispersión","Asociación no es causalidad"]};
+const isEx=t=>/^Ejemplo/.test(t);
+function buildRutas(){
+  $$("ol.agenda").forEach(ol=>{ol.innerHTML=AG[ol.dataset.v].map(t=>isEx(t)?`<li class="ex"><b>SPSS</b>${t.replace(/^Ejemplo( \d)? en SPSS: /,(m,n)=>"Ejemplo"+(n||"")+": ")}</li>`:`<li>${t}</li>`).join("")});
+  $$(".slide[data-step]").forEach(s=>{const v=s.dataset.v,k=+s.dataset.step,L=AG[v];const d=document.createElement("div");d.className="ruta";
+    d.setAttribute("aria-label",`Lección ${v}, paso ${k} de ${L.length}: ${L[k-1]}`);
+    d.innerHTML=`<em>Lección ${v} · paso ${k} de ${L.length}</em>`+L.map((t,i)=>`<span class="${i+1<k?"done":i+1===k?"now":""}${isEx(t)?" ex":""}" title="${t}">${i+1}</span>`).join("");
+    const inner=$(".slide-inner",s);inner.insertBefore(d,inner.firstChild)});
+}
+
+/* ==================== NAVEGACIÓN (el marco común toma el control visual) ==================== */
+const slides=$$(".slide"),N=slides.length;let cur=0;
+const DRAW={};
+function registra(id,fn){const s=$(id)&&$(id).closest(".slide");if(s)DRAW[slides.indexOf(s)]=fn}
+function dibuja(i){if(DRAW[i])try{DRAW[i]()}catch(e){console.error(e)}}
+function go(i){i=Math.max(0,Math.min(N-1,i));slides[cur].classList.remove("active");cur=i;slides[cur].classList.add("active");slides[cur].scrollTop=0;dibuja(cur);pushNotes()}
+const next=()=>go(cur+1),prev=()=>go(cur-1);
+let rzT;window.addEventListener("resize",()=>{clearTimeout(rzT);rzT=setTimeout(()=>dibuja(cur),120)});
+
+/* ayudas del instructor: G = grabación, N = notas */
+let mvT;function grab(on){document.body.classList.toggle("grab",on===undefined?!document.body.classList.contains("grab"):on);setTimeout(()=>window.dispatchEvent(new Event("resize")),30)}
+window.addEventListener("mousemove",()=>{if(!document.body.classList.contains("grab"))return;document.body.classList.add("mv");clearTimeout(mvT);mvT=setTimeout(()=>document.body.classList.remove("mv"),1200)});
+let NW=null;
+function pushNotes(){const s=slides[cur],nx=slides[cur+1];const html=`<p style="font:700 12px Arial;letter-spacing:.08em;text-transform:uppercase;color:#7A5C0E;margin:0 0 6px">Lámina ${cur+1} de ${N}</p><h2 style="font:700 20px Arial;margin:0 0 12px;color:#24398A">${s.dataset.sec||""}</h2><p style="font:17px/1.5 Arial;margin:0 0 18px;color:#1B2631">${s.dataset.notes||""}</p>${nx?`<p style="font:14px Arial;color:#566573;border-top:1px solid #DFE4EA;padding-top:10px">Sigue: ${nx.dataset.sec}</p>`:""}`;
+  $("#notes-b").innerHTML=html;try{if(NW&&!NW.closed)NW.document.body.innerHTML=html}catch(e){}}
+function notes(){try{if(NW&&!NW.closed){NW.close();NW=null;return}NW=window.open("","notas_instructor","width=560,height=640")}catch(e){NW=null}
+  if(NW){NW.document.title="Notas del instructor";NW.document.body.style.cssText="margin:0;padding:26px;background:#F4F3F0";pushNotes();NW.document.addEventListener("keydown",onKey)}else $("#notes").classList.toggle("on")}
+function onKey(e){if(/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName))return;const k=e.key;
+  if(k==="ArrowRight"||k===" "||k==="PageDown"){e.preventDefault();next()}else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
+  else if(k==="g"||k==="G")grab();else if(k==="n"||k==="N")notes();
+  else if(k==="Escape"&&document.body.classList.contains("grab"))grab(false)}
+document.addEventListener("keydown",onKey);
+let tx=0,ty=0;document.addEventListener("touchstart",e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY},{passive:true});
+document.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.8)dx<0?next():prev()},{passive:true});
+
+/* ==================== ARRANQUE ==================== */
+$("#raw-soft").innerHTML=SOFT_RAW.map(v=>`<span>${v}</span>`).join("");
+drawMapa();
+seg("#seg-forma",drawFormas);drawFormas("abs");
+$("#rg-acu").addEventListener("input",e=>drawAcu(+e.target.value));drawAcu(19);
+$("#rg-w").addEventListener("input",drawAncho);registra("#ch-ancho",drawAncho);
+seg("#seg-ds",k=>{catState.ds=k;drawCat()});seg("#seg-tipo",k=>{catState.tp=k;drawCat()});seg("#seg-ord",k=>{catState.ord=k;drawCat()});registra("#ch-cat",drawCat);
+seg("#seg-hp",k=>{hpMode=k;drawHP()});registra("#ch-hp",drawHP);
+$("#rg-oj").addEventListener("input",drawOj);registra("#ch-oj",drawOj);
+seg("#seg-st",k=>{stState.d=k;drawStem()});seg("#seg-sp",k=>{stState.sp=k;drawStem()});drawStem();
+drawPatrones();
+seg("#seg-sc",k=>{scState.d=k;drawSc()});seg("#seg-ln",k=>{scState.ln=k;drawSc()});registra("#ch-sc",drawSc);
+registra("#mini-v3a",()=>vBars("#mini-v3a",SOFT,50,"Porcentaje"));
+registra("#mini-v3c",()=>vPie("#mini-v3c"));
+registra("#mini-v4a",()=>vHist("#mini-v4a"));
+registra("#mini-v4c",()=>vLine("#mini-v4c",[["<= 14",20],["15 - 19",60],["20 - 24",85],["25 - 29",95],["30+",100]],100,[0,20,40,60,80,100],"Duracion (agrupada)","Porcentaje acumulado"));
+registra("#mini-v5",()=>vScatter("#mini-v5"));
+buildRutas();
+slides[0].classList.add("active");
+window.__deck={n:N,actual:function(){return cur},ir:go,sig:next,ant:prev,tema:function(){dibuja(cur)}};
+/* al imprimir: dibujar todo y mostrar todas las láminas */
+window.addEventListener("beforeprint",()=>{slides.forEach((s,i)=>{s.classList.add("active");dibuja(i)})});
+window.addEventListener("afterprint",()=>{slides.forEach((s,i)=>s.classList.toggle("active",i===cur))});
+</script>
+
+<header id="marco-cab">
+  <div class="mc-fila">
+    <a class="mc-marca" href="../m2-teoria.html" title="Guía del módulo 2"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAAC0CAMAAABMpVWqAAABIFBMVEXn2NXZlQ9WaatiX2Gg1ZwdOI+Zo8vezrIhOY2rlyLnrZwhOY0dOpDnGxuzj02qrrcEBn7KoW1bt1bsZ2UAAP94hrkAb293xHKJeEuHOGI3SHTgaRm7w9z6wQAgnxx1VS5sqSY2T6JDPIFjecCCyHohRZCNZS0gIiR9jMAAGHxVVarmP0DBv+UAAADoMTEXOJL8/PzrtgD4pwDmKCkAAAAmO4s0pzAFK4ybYwMAAAAuR5EAAAAAAADx6ewAAAAAAACTWgGwNU0AAABVWG5tOGytiTXUpxHGxspROXmneCjWMjpSaK7rV1f22NQAVarHNEMAPn6vdQvyl5bMhwHpR0ajagfud3Y7U5rQ6c5Iqzawt9TwiIb2trVStE2VNlrS1+i477XqAAAAYHRSTlP//////x7//17//6DW////Av///wH/Av///f//////////////Cf////8D//8A//7/////+v3///+v/44u/1Fv//7Q//3////9//7///8D/gT//////////////////f+YuRTTAAAfw0lEQVR42s1cB0MiybYuwsCAiiDmMDuzd8N9QbqVHBoQwVEBlWTC8P//xfvOqepIg86s++7Wzgo0RfXX53wnVBSHP1E2b6749dOnz5+XlpaWlzUuy8v48Pnzp0/8ZTJ59TNtix/+xdUN/f390+clhWO2LC8pVFdX638zoE1CcwUwdFtNy5+ft3deTlCur+nvy077/Dyfp680Bepq828ERM+bVJLJn++cXF9mMtlsdmVlJZuhv/wmc3l98nKeNyWFn92s/y2A1kk4nxhN/vzlBFioZMe99O102sv24kMq46y8nrl+aTOoJYaU/HBA62Do76ypfFuCyfKts086l+nY0PW+0OMSkPx7wpiWSUxXyQ8FRNL59JlJY4lG3jULIPGs0PXxVBfZ3nCazTgQKUx5EtM7+f0uQFekK2p455o4w7LJPvWljABo5RYimur9qS5BrghhAgKlXs6V5m4+CNDmOqQDOOcnhKY3fBrittlMX3+a0g3xupLW9eGUNMcUmj7pRsZGBDGZkK4+AhAaUXBwk3SUbtvPZHvMHLptXxcr+DQd6qL3lOllSWYoPScihpT/nHyH3sQ7tEXcOclIaehDonF8pfdk6FEm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" alt="Escudo de la Universidad de Sonora" width="24" height="30"><span>Módulo 2 · Tablas y gráficas <small>· Diplomado UNISON</small></span></a>
+    <a class="mc-b" href="../modulo2.html">← Módulo 2</a>
+    <a class="mc-b g" href="../m2-teoria.html">Volver a las lecciones</a>
+    <span class="mc-esp"></span>
+    <span class="mc-donde" id="mc-donde"></span>
+    <button type="button" class="mc-b" id="mc-indice" aria-controls="marco-indice" aria-expanded="false">☰ Índice</button>
+  </div>
+  <div class="mc-regla" id="mc-regla"><span class="t">Claves del módulo</span><span class="r">El tipo de dato decide la tabla y la gráfica</span><span class="r">La acumulada solo se lee si hay orden</span><span class="r">El ancho de clase muestra o esconde el patrón</span><span class="r">Pastel: cinco categorías como máximo</span><span class="r">Asociación no es causalidad</span><button type="button" class="mc-b" id="mc-regla-tog" aria-expanded="true" title="Contraer o mostrar la regla">▾</button></div>
+</header>
+<nav id="marco-pie" aria-label="Avance de la presentación">
+  <button type="button" class="mc-b" id="mc-ant" aria-label="Lámina anterior">←</button>
+  <div class="mp-avance"><div class="mp-barra"><i id="mp-barra"></i></div><span class="mp-cont" id="mp-cont"></span></div>
+  <button type="button" class="mc-b" id="mc-sig" aria-label="Lámina siguiente">→</button>
+</nav>
+<div id="marco-indice" role="dialog" aria-modal="true" aria-label="Índice del módulo 2">
+  <div class="mi-cab"><h2>Módulo 2 · Tablas y gráficas</h2><a class="mc-b" href="../m2-teoria.html">Volver a las lecciones</a><button type="button" class="mc-b" id="mi-cerrar">Cerrar ✕</button></div>
+  <div class="mi-herr" role="group" aria-label="Herramientas de lectura"><span>Ver:</span>
+    <button type="button" class="mc-b" data-tema="light">Claro</button><button type="button" class="mc-b" data-tema="dark">Oscuro</button><button type="button" class="mc-b" data-tema="proyeccion">Proyección</button>
+    <button type="button" class="mc-b" id="menos" aria-label="Letra más chica">A−</button><button type="button" class="mc-b" id="mas" aria-label="Letra más grande">A+</button>
+    <button type="button" class="mc-b" id="completa">Pantalla completa</button><button type="button" class="mc-b" id="imprimir">Imprimir</button><button type="button" class="mc-b" id="restablecer">Restablecer</button></div>
+  <details class="mi-lec" data-a="1" data-b="3"><summary><span class="n">Inicio</span><span>Portada, mapa del módulo y la idea central</span><span class="r">láminas 1 a 3</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="4" data-b="10"><summary><span class="n">Lección 1</span><span>Distribuciones de frecuencia: absolutas, relativas, porcentuales y acumuladas</span><span class="r">láminas 4 a 10</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="11" data-b="17"><summary><span class="n">Lección 2</span><span>Tablas para datos cualitativos y cuantitativos; agrupación en clases</span><span class="r">láminas 11 a 17</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="18" data-b="22"><summary><span class="n">Lección 3</span><span>Gráficos para datos categóricos: barras y pastel (circular)</span><span class="r">láminas 18 a 22</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="23" data-b="30"><summary><span class="n">Lección 4</span><span>Histograma, polígono de frecuencias, ojiva y tallo y hoja</span><span class="r">láminas 23 a 30</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="31" data-b="35"><summary><span class="n">Lección 5</span><span>Diagramas de dispersión como primera exploración de relaciones</span><span class="r">láminas 31 a 35</span></summary><div class="mi-lams"></div></details>
+  <details class="mi-lec" data-a="36" data-b="36"><summary><span class="n">Cierre</span><span>Resumen: qué herramienta para qué pregunta</span><span class="r">lámina 36</span></summary><div class="mi-lams"></div></details>
+  <p class="mi-atajos">Atajos: <kbd>→</kbd> <kbd>←</kbd> avanzar y regresar · <kbd>Inicio</kbd> <kbd>Fin</kbd> primera y última · <kbd>M</kbd> índice · <kbd>T</kbd> tema · <kbd>F</kbd> pantalla completa · <kbd>Esc</kbd> cerrar · para el instructor: <kbd>G</kbd> modo grabación (oculta el marco) · <kbd>N</kbd> notas en otra ventana</p>
+  <details class="mi-det"><summary>Fuentes</summary><ol><li>Anderson, D. R., Sweeney, D. J., y Williams, T. A. (2012). <em>Estadística para negocios y economía</em> (11.ª ed.). Cengage Learning. Cap. 2 (pp. 33-73). Bases de datos del capítulo: SoftDrink, Audit, Restaurant, PelicanStores, Stereo y Movies. [Verificable]</li><li>Muñan Valencia, J. A. (2026). <em>Estadística descriptiva: presentaciones tabulares y gráficas</em> [bases en SPSS y materiales]. https://jorgemunan20.github.io/estadistica-descriptiva/ [Verificable]</li><li>IBM Corp. (2017). <em>IBM SPSS Statistics 25</em> [software]. Las rutas de menú corresponden a la versión en español. [Verificable]</li></ol></details>
+  <details class="mi-det"><summary>Trazabilidad de esta página</summary><div><table><tbody><tr><th scope="row">Archivo</th><td>modulo-2.html (propuesta del instructor para sustituir la versión V6)</td></tr><tr><th scope="row">Versión</th><td>10/11/2026 (revisión 2). Presentación nueva del módulo 2: 36 láminas en cinco lecciones que siguen el temario de la plataforma. Cada lección va en el mismo orden (concepto, ejemplo en SPSS paso a paso, lo que debe salir en el Visor, interpretación), con 9 ejemplos de SPSS y 8 láminas interactivas. Todos los ejemplos usan las seis bases de Anderson ya publicadas (SoftDrink, Audit, Restaurant, PelicanStores, Stereo, Movies). Conserva el marco común del diplomado.</td></tr><tr><th scope="row">Autor del contenido</th><td>Jorge Alberto Muñan Valencia · munan.jorge.itn@gmail.com</td></tr><tr><th scope="row">Marco común</th><td>Mtro. Eduardo Salas García · esalas@eduardosalas.com</td></tr><tr><th scope="row">Pendiente</th><td>Actualizar en <code>modulo-2-guia.html</code> los enlaces a láminas (#lN) y el conteo de lecciones, que corresponden a la versión anterior de 42 láminas.</td></tr></tbody></table></div></details>
+</div>
+<div id="marco-retoma" hidden role="status"><span id="mr-txt"></span> <button type="button" class="mc-b" id="mr-ini">Empezar desde el inicio</button> <button type="button" class="mc-b" id="mr-ok">Seguir aquí</button></div>
+<footer class="marco-pie-imp">modulo-2.html · Módulo 2 · Tablas y gráficas · Jorge Alberto Muñan Valencia · Universidad de Sonora, Departamento de Administración</footer>
+<script>
+/* Marco común de presentación */
+(function(){
+  var C={"sel": ".slide", "attr": "@h1,h2", "pref": "m2_", "zoom": "#deck"}, D=window.__deck; if(!D) return;
+  try{if(!window.name)window.name='diplomado-presentacion';}catch(e){}
+  var raiz=document.documentElement, slides=[].slice.call(document.querySelectorAll(C.sel)), N=D.n;
+  var cab=document.getElementById('marco-cab'), pie=document.getElementById('marco-pie'), ind=document.getElementById('marco-indice');
+  var lecs=[].slice.call(ind.querySelectorAll('.mi-lec')), botones=[];
+  function guarda(k,v){try{localStorage.setItem(C.pref+k,v)}catch(e){}}
+  function lee(k){try{return localStorage.getItem(C.pref+k)}catch(e){return null}}
+  var tmp=document.createElement('div');
+  function etiqueta(k){var s=slides[k],t='';
+    if(C.attr.charAt(0)==='@'){var h=s.querySelector(C.attr.slice(1));if(h){tmp.innerHTML=h.innerHTML.replace(/<br\s*\/?>/gi,' ');t=tmp.textContent.replace(/\s+/g,' ').trim();}}
+    else t=s.getAttribute(C.attr)||'';
+    return t||('Lámina '+(k+1));}
+  lecs.forEach(function(L){var a=+L.dataset.a,b=+L.dataset.b,box=L.querySelector('.mi-lams');
+    for(var k=a-1;k<=b-1&&k<N;k++){(function(k){var bt=document.createElement('button');bt.type='button';
+      bt.innerHTML='<span class="k">'+String(k+1).padStart(2,'0')+'</span>';bt.appendChild(document.createTextNode(etiqueta(k)));
+      bt.onclick=function(){cierra();D.ir(k);};box.appendChild(bt);botones[k]=bt;})(k);}});
+  function medidas(){raiz.style.setProperty('--marco-cab',cab.offsetHeight+'px');raiz.style.setProperty('--head',cab.offsetHeight+'px');raiz.style.setProperty('--marco-pie',pie.offsetHeight+'px');}
+  var ultimo=-1;
+  function refresca(){var k=D.actual(); if(k===ultimo) return; ultimo=k;
+    document.getElementById('mp-cont').textContent='Lámina '+(k+1)+' de '+N;
+    document.getElementById('mp-barra').style.width=(N>1?k/(N-1)*100:100)+'%';
+    var lc=null; lecs.forEach(function(L){var on=k+1>=+L.dataset.a&&k+1<=+L.dataset.b;L.classList.toggle('actual',on);if(on)lc=L;});
+    document.getElementById('mc-donde').textContent=(lc?lc.querySelector('.n').textContent+' · ':'')+etiqueta(k);
+    botones.forEach(function(b,j){if(b)b.setAttribute('aria-current',String(j===k));});
+    cab.classList.toggle('sin-regla',!!slides[k].dataset.hook); medidas();
+    guarda('lamina',String(k)); try{history.replaceState(null,'','#l'+(k+1))}catch(e){}
+    document.getElementById('mc-ant').disabled=k===0; document.getElementById('mc-sig').disabled=k===N-1 && !(slides[k].querySelector('.frag:not(.on)'));
+  }
+  var pend=false; function programa(){if(pend)return;pend=true;requestAnimationFrame(function(){pend=false;refresca();});}
+  var mo=new MutationObserver(programa); slides.forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+  function abre(){var k=D.actual();lecs.forEach(function(L){L.open=L.classList.contains('actual');});ind.classList.add('abierto');document.getElementById('mc-indice').setAttribute('aria-expanded','true');
+    var b=botones[k]; if(b) setTimeout(function(){b.focus();},30);}
+  function cierra(){ind.classList.remove('abierto');document.getElementById('mc-indice').setAttribute('aria-expanded','false');}
+  document.getElementById('mc-indice').onclick=function(){ind.classList.contains('abierto')?cierra():abre();};
+  document.getElementById('mi-cerrar').onclick=cierra;
+  document.getElementById('mc-ant').onclick=function(){D.ant();};
+  document.getElementById('mc-sig').onclick=function(){D.sig();};
+  var rg=document.getElementById('mc-regla'), rt=document.getElementById('mc-regla-tog');
+  function regla(min){rg.classList.toggle('min',min);rt.textContent=min?'▸ regla':'▾';rt.setAttribute('aria-expanded',String(!min));guarda('regla',min?'min':'');medidas();}
+  regla(lee('regla')==='min'); rt.onclick=function(){regla(!rg.classList.contains('min'));};
+  function tema(t){raiz.classList.toggle('proy',t==='proyeccion');raiz.setAttribute('data-theme',t==='dark'?'dark':'light');guarda('tema',t);if(D.tema)try{D.tema()}catch(e){}}
+  [].forEach.call(ind.querySelectorAll('button[data-tema]'),function(b){b.onclick=function(){tema(b.getAttribute('data-tema'));};});
+  var t0=lee('tema'); tema(t0||'light');
+  var esc=parseFloat(lee('letra'))||1, Z=document.querySelector(C.zoom);
+  function aplica(){Z.style.zoom=esc===1?'':esc;guarda('letra',String(esc));}
+  if(esc!==1) aplica();
+  document.getElementById('mas').onclick=function(){esc=Math.min(1.5,Math.round((esc+0.1)*10)/10);aplica();};
+  document.getElementById('menos').onclick=function(){esc=Math.max(0.8,Math.round((esc-0.1)*10)/10);aplica();};
+  function completa(){if(!document.fullscreenElement){if(raiz.requestFullscreen)raiz.requestFullscreen();}else if(document.exitFullscreen)document.exitFullscreen();}
+  document.getElementById('completa').onclick=completa;
+  document.getElementById('imprimir').onclick=function(){cierra();setTimeout(function(){window.print();},100);};
+  document.getElementById('restablecer').onclick=function(){['lamina','letra','tema','regla'].forEach(function(k){try{localStorage.removeItem(C.pref+k)}catch(e){}});
+    esc=1;aplica();tema('light');regla(false);cierra();D.ir(0);};
+  /* Atajos comunes: el marco atiende M, T, F, Esc, Inicio y Fin; las flechas las atiende la presentación */
+  window.addEventListener('keydown',function(e){
+    if(/^(input|textarea|select)$/i.test((e.target&&e.target.tagName)||'')) return;
+    var k=e.key, mio=true;
+    if(k==='Escape'){cierra();}
+    else if(k==='m'||k==='M'){ind.classList.contains('abierto')?cierra():abre();}
+    else if(k==='t'||k==='T'){tema(raiz.getAttribute('data-theme')==='dark'?'light':'dark');}
+    else if(k==='f'||k==='F'){completa();}
+    else if(k==='Home'){D.ir(0);}
+    else if(k==='End'){D.ir(N-1);}
+    else if(/^[0-9aArR]$/.test(k)){/* sin atajos propios de cada presentación */}
+    else if(ind.classList.contains('abierto')&&/^(Arrow|Page)/.test(k)){mio=false; return;}
+    else mio=false;
+    if(mio){e.preventDefault();e.stopImmediatePropagation();}
+  },true);
+  /* Inicio: #lN, o retomar la última lámina */
+  function hashK(){var m=/^#l(\d+)$/.exec(location.hash);return m?Math.min(N,Math.max(1,+m[1]))-1:-1;}
+  var h=hashK(), g=parseInt(lee('lamina'),10);
+  if(h>=0) D.ir(h);
+  else if(g>0&&g<N){D.ir(g);var r=document.getElementById('marco-retoma');document.getElementById('mr-txt').textContent='Retomas donde te quedaste: lámina '+(g+1)+' de '+N+'.';
+    r.hidden=false;document.getElementById('mr-ini').onclick=function(){r.hidden=true;D.ir(0);};document.getElementById('mr-ok').onclick=function(){r.hidden=true;};setTimeout(function(){r.hidden=true;},9000);}
+  else D.ir(0);
+  window.addEventListener('hashchange',function(){var k=hashK();if(k>=0&&k!==D.actual())D.ir(k);});
+  window.addEventListener('resize',medidas); medidas(); setTimeout(medidas,300); refresca();
+})();
+</script>
+</body>
+</html>
